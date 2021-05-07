@@ -2,6 +2,7 @@ import requests
 import bs4
 import re
 import os
+import sys
 
 """
 Downloads all chapters of Pale (none of the extra materials) and stores the 
@@ -11,10 +12,18 @@ the same directory the script is run in. Each arc of Pale gets its own
 subdirectory,
 
 Chapter download begins with Blood Run Cold 0.0, but if you want to start later
-you can replace the link below.
+you can pass in a start link as an argument to the process. 
+
+EX: to download just the most recent chapter, run python get_text.py <link_to_chapter>)
+
+If you only want one specific chapter, just add a break statement after line
+112 in download_chapters().
 """
 
-START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
+if len(sys.argv)<2:
+    START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
+else:
+    START_LINK = sys.argv[1]
 
 class Chapter():
   def __init__(self, url):

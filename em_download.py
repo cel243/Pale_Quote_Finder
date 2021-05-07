@@ -2,12 +2,14 @@ import requests
 import bs4
 import re
 import os
+import sys
 
 """
-Downloads all extra materials, as best as it can, given some EMs are just
-pictures. It'll get any non-picture text from the page, and I also tried
-to get the transcript text that is sometimes in the comment section. This...
-quite possibly will get more text than intended in many cases. I decided too much text was better than missing important things.
+Downloads all extra materials, as best as it can.
+
+It'll get any non-picture text from the page, and I also tried
+to get the transcript text that is sometimes in the comment section. This
+quite possibly will get more text than intended in some cases. I decided too much text was better than missing important things.
 
 It does miss the transcript entirely on the Kennet Brochure EM. 
 If you care about that, I guess you can get that text by hand. The
@@ -17,25 +19,36 @@ hit rate on future EM's either, but it can always be adapted later, so there's
 that.
 
 Default behavior of this script is to go to the page that lists all the
-extra materials and download them all from there. If you only want one
-page, indicate that in DOWNLOAD_THIS_EM below (replace None with an EM
-object).
+extra materials and download them all from there. If you only want only one
+EM, pass as an argument to the script the chapter for which this EM is
+spoilers for. 
+
+    EX: To download just the borrowed eyes comic, run 
+      python em_download.py '7.3'
+    Sometimes it takes a few days for the EM to be added to the main EM page
+    that links all the extra materials (which is where I go to look for the
+    EM). If the script can't find the EM you're trying to download, that's
+    probably why. 
+
+    If you really want a specific EM and it hasn't been added to that page yet,
+    comment out 178-184 and uncomment 185 after replacing <url> and <name>
+    with the url and name of the extra material. 
 
 Writes one file per extra material to ./Pale_Chapters/EM/<em_name>.txt
 """
+
+if len(sys.argv)<2:
+    DOWNLOAD_ONE_EM = None
+else:
+    DOWNLOAD_ONE_EM = sys.argv[1]
+
 class EM():
   def __init__(self, url, name):
     self.url = url
     self.name = name
 
-### EDIT THIS IF YOU WANT TO DOWNLOAD ONLY ONE PAGE  #############
-
-DOWNLOAD_THIS_EM = None #EM("<link>", "<file name>")
-
-##################################################################
-
 def get_em_list():
-  """Returns a list of EMs, including all extra materials listed at 
+  """Returns a list of EMs; all extra materials listed at 
   "https://palewebserial.wordpress.com/extra-material/" """
   em_page_link = "https://palewebserial.wordpress.com/extra-material/"
   em_page = requests.get(em_page_link).text
@@ -53,6 +66,27 @@ def get_em_list():
         name = spoiler_tags[j] +" "+ link.get_text()
         ems.append(EM(url, name))
   return ems
+
+def get_this_em(spoiler_tag):
+  """Returns a single EM, where the spoiler tag is the same as what's
+  passed in. """
+  em_page_link = "https://palewebserial.wordpress.com/extra-material/"
+  em_page = requests.get(em_page_link).text
+  soup = bs4.BeautifulSoup(em_page, features="html.parser")
+  entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[1].contents[4]
+  em = None
+  for i in range(len(entry.contents)):
+    item  = entry.contents[i]
+    if type(item) == bs4.element.Tag and item.name == "p":
+      spoiler_tags = re.findall("\[[0-9]+\.[0-9a-z]+\]",item.get_text())
+      links = item.findChildren("a" , recursive=True)
+      for j in range(len(links)):
+        link = links[j]
+        url = link.get("href")
+        if spoiler_tag in spoiler_tags[j]:
+            name = spoiler_tags[j] +" "+ link.get_text()
+            em = EM(url, name)
+  return em
 
 def get_em_text(contents):
     """Returns any text on the page, or the empty string if it's just
@@ -102,8 +136,16 @@ def get_transcript(comments):
         if type(item) == bs4.element.Tag:
             comment_text = get_text_of_comment(comments[i].contents)
             comment_author = get_author_of_comment(comments[i].contents)
-            if "Transcript" in comment_text or "transcript:" in comment_text.lower() or "unofficial transcript" in comment_text.lower() or "text:" in comment_text.lower() or comment_author.lower() in {"wildbow"}:
+            if "Transcript" in comment_text \
+                or "transcript:" in comment_text.lower() \
+                or "unofficial transcript" in comment_text.lower() \
+                or "text:" in comment_text.lower() \
+                or comment_author.lower() in {"wildbow"}:
+                ## a little hacky to look for comments by wildbow, but
+                ## his comments are transcripts more often than not
                 if comment_author.lower() == "jeffery mewtamer":
+                    ## this handles an edge case where the above checks failed
+                    ## for a particular EM
                     continue
                 comment_text += get_all_reply_text(comments[i].contents)
                 return comment_text
@@ -133,9 +175,11 @@ def write_file(em):
     print(f"Wrote {em.name}")
 
 if __name__ == "__main__":
-  if DOWNLOAD_THIS_EM is not None:
-    download_em(DOWNLOAD_THIS_EM)
-  else:
-    ems = get_em_list()
-    for em in ems:
-      download_em(em)
+    if DOWNLOAD_ONE_EM is not None:
+        em = get_this_em(DOWNLOAD_ONE_EM)
+        download_em(em)
+    else:
+        ems = get_em_list()
+        for em in ems:
+            download_em(em)
+    # download_em(EM("<url>","<name>"))
