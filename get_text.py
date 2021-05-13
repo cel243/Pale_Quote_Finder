@@ -5,7 +5,7 @@ import os
 import sys
 
 """
-Downloads all chapters of Pale (none of the extra materials) and stores the 
+Downloads ALL chapters of Pale (none of the extra materials) and stores the 
 raw text of the chapters in txt files labelled "Arc Name x.x (Perspective)" 
 (ex: "Back Away 5.1 (Lucy).txt"), in a directory "Pale_Chapters/", created in 
 the same directory the script is run in. Each arc of Pale gets its own 
@@ -14,10 +14,11 @@ subdirectory,
 Chapter download begins with Blood Run Cold 0.0, but if you want to start later
 you can pass in a start link as an argument to the process. 
 
-EX: to download just the most recent chapter, run python get_text.py <link_to_chapter>)
-
-If you only want one specific chapter, just add a break statement after line
-112 in download_chapters().
+    EX: If you want to download ONLY the most recent chapter, run 
+        python get_text.py <link_to_chapter>
+    If you only want one specific chapter, that isn't the most recent one, 
+    just add a break statement at the end of the while loop in
+    download_chapters().
 """
 
 if len(sys.argv)<2:
@@ -97,18 +98,60 @@ def write_file(chapter):
         os.mkdir(dir)
     if not os.path.exists(f"{dir}/{chapter.arc}"):
         os.mkdir(f"{dir}/{chapter.arc}")
-    with open(f"{dir}/{chapter.arc}/{chapter.title} ({chapter.perspective}).txt", 'w') as file:
+    chap_num_str = str(chapter.chap_num)
+    if chapter.chap_num < 100:
+        chap_num_str = "0" + chap_num_str
+    if chapter.chap_num < 10:
+        chap_num_str = "0" + chap_num_str
+    with open(f"{dir}/{chapter.arc}/({chap_num_str}) {chapter.title} ({chapter.perspective}).txt", 'w') as file:
         file.write(chapter.chapter_text)
+
+def get_previous_chap_num(page_text):
+    """  """
+    soup = bs4.BeautifulSoup(page_text, features="html.parser")
+    entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
+    entry_contents = entry.contents
+
+    link = None
+    for i in range(len(entry_contents)):
+        item = entry_contents[i]
+        if type(item) == bs4.element.Tag:
+            for child in item.findChildren("a" , recursive=True):
+                if child.get_text().strip() == "Previous Chapter":
+                    link =  child.get("href")
+    if link is None:
+        return 1
+
+    resp = requests.get(link)
+    page_text = resp.text
+    soup = bs4.BeautifulSoup(page_text, features="html.parser")
+    title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text().split("|")[0]).strip().replace("  "," ")
+    arc = re.findall("[0-9]+.", title)[0][:-1]
+    if len(arc) < 2:
+        arc = "0"+arc
+    if not os.path.exists(f"Pale_Chapters/{arc}"):
+        return 1
+    for filename in os.listdir(f"Pale_Chapters/{arc}"):
+        if title in filename:
+            return int(filename.split(" ")[0].replace("(","").replace(")","")) + 1
+
 
 def download_chapters(url):
     """Retrieve and write all Pale chapters starting at `url`."""
+    start = True
+    chap_num = None
     while url is not None:
         chapter = Chapter(url)
         resp = requests.get(url)
         page_text = resp.text
+        if start:
+            chap_num = get_previous_chap_num(page_text)
+            start = False
+        chapter.chap_num = chap_num
         download_this_chapter(chapter, page_text)
         write_file(chapter)
         url = chapter.next_link
+        chap_num += 1
         print("wrote " + chapter.title)
 
 if __name__ == "__main__":
