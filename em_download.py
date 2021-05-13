@@ -16,20 +16,20 @@ Some notes on the comment-section transcript:
     transcript will have extra text in the comment containing the 
     transcript. It's never a ton of extra text, though. 
 
-  - I maintain a general rule for looking for comment section transcripts,
-    and this rule works most of the time. Default behavior: if it finds
+  - I have a general rule that looks for comment section transcripts, 
+    AND I handle the special cases that arise. Default behavior: if it finds
     a parent comment contaiing the desired keywords, it will download
     just that parent comment. 
     However, there are chapters where this doesn't work (ex: transcript 
     continues in the comment replies), and I use EXCEPTION_MAPPING below to 
     tell the script how to find those transcripts. Detailed instructions are 
-    in the code comments. 
+    in those code comments. 
 
   - In the event that general rule I use fails on a future EM, just add that
     special case to the exception mapping below, manually. 
 
 Default behavior of this script is to go to the page that lists all the
-extra materials and download them all from there. If you only want only one
+extra materials and download ALL EMs from there. If you only want only one
 EM, pass as an argument to the script the chapter number for which this EM is
 spoilers for. 
 
@@ -134,7 +134,7 @@ def get_em_text(contents):
     for item in contents:
         if type(item) == bs4.element.Tag and item.get("id") is None:
             text+=item.get_text()+"\n\n"
-    return text.strip()
+    return text.strip().replace('’', "'").replace("”", '"').replace("“", '"')
 
 def get_author_of_comment(comment):
     """Returns author of comment"""
@@ -227,6 +227,7 @@ def download_em(em):
     else:
         em.transcript = get_transcript(comments)
 
+    em.transcript = em.transcript.replace('’', "'").replace("”", '"').replace("“", '"')
     write_file(em)
 
 def write_file(em):
@@ -234,11 +235,11 @@ def write_file(em):
     dir = 'Pale_Chapters'
     if not os.path.exists(dir):
         os.mkdir(dir)
-    if not os.path.exists(f"{dir}/EM"):
-        os.mkdir(f"{dir}/EM")
-    with open(f"{dir}/EM/{em.name}.txt", 'w') as file:
+    if not os.path.exists(f"{dir}{os.path.sep}EM"):
+        os.mkdir(f"{dir}{os.path.sep}EM")
+    with open(f"{dir}{os.path.sep}EM{os.path.sep}{em.name}.txt", 'w') as file:
         if len(em.transcript.strip()) > 0:
-            file.write(em.text + "\n\n~~ transcript ~~\n\n" + em.transcript)
+            file.write(em.text + "\n\nTRANSCRIPT \n\n" + em.transcript)
         else:
             file.write(em.text)
     print(f"Wrote {em.name}")
@@ -251,4 +252,4 @@ if __name__ == "__main__":
         ems = get_em_list()
         for em in ems:
             download_em(em)
-    # download_em(EM("https://palewebserial.wordpress.com/2021/05/06/11-2-spoilers-just-in-case/","[11.2] Just in Case", "[11.2]"))
+    # download_em(EM("https://palewebserial.wordpress.com/2021/05/06/11-2-spoilers-just-in-case/","(38) [11.2] Just in Case", "[11.2]"))

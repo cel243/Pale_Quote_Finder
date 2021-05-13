@@ -6,16 +6,16 @@ import sys
 
 """
 Downloads ALL chapters of Pale (none of the extra materials) and stores the 
-raw text of the chapters in txt files labelled "Arc Name x.x (Perspective)" 
-(ex: "Back Away 5.1 (Lucy).txt"), in a directory "Pale_Chapters/", created in 
-the same directory the script is run in. Each arc of Pale gets its own 
+raw text of the chapters in txt files, in a directory "Pale_Chapters/", created 
+in the same directory the script is run in. Each arc of Pale gets its own 
 subdirectory,
 
 Chapter download begins with Blood Run Cold 0.0, but if you want to start later
 you can pass in a start link as an argument to the process. 
 
     EX: If you want to download ONLY the most recent chapter, run 
-        python get_text.py <link_to_chapter>
+        `python get_text.py <link_to_chapter>`
+
     If you only want one specific chapter, that isn't the most recent one, 
     just add a break statement at the end of the while loop in
     download_chapters().
@@ -69,11 +69,9 @@ def get_chapter_text(entry_contents):
             if item.get_text().strip() in {"Next Chapter","Previous Chapter"}\
                 or "Last Thursday" in item.get_text():
                 continue
-            # if "🟂" == item.get_text().strip():
-            #     text += "~\n\n"
             else:
                 text+=item.get_text()+"\n\n"
-    return text
+    return text.replace('’', "'").replace("”", '"').replace("“", '"')
 
 def download_this_chapter(chapter, page_text):
     """Given the raw html of the chapter page, populates the 
@@ -96,14 +94,14 @@ def write_file(chapter):
     dir = 'Pale_Chapters'
     if not os.path.exists(dir):
         os.mkdir(dir)
-    if not os.path.exists(f"{dir}/{chapter.arc}"):
-        os.mkdir(f"{dir}/{chapter.arc}")
+    if not os.path.exists(f"{dir}{os.path.sep}{chapter.arc}"):
+        os.mkdir(f"{dir}{os.path.sep}{chapter.arc}")
     chap_num_str = str(chapter.chap_num)
     if chapter.chap_num < 100:
         chap_num_str = "0" + chap_num_str
     if chapter.chap_num < 10:
         chap_num_str = "0" + chap_num_str
-    with open(f"{dir}/{chapter.arc}/({chap_num_str}) {chapter.title} ({chapter.perspective}).txt", 'w') as file:
+    with open(f"{dir}{os.path.sep}{chapter.arc}{os.path.sep}({chap_num_str}) {chapter.title} ({chapter.perspective}).txt", 'w') as file:
         file.write(chapter.chapter_text)
 
 def get_previous_chap_num(page_text):
@@ -129,9 +127,9 @@ def get_previous_chap_num(page_text):
     arc = re.findall("[0-9]+.", title)[0][:-1]
     if len(arc) < 2:
         arc = "0"+arc
-    if not os.path.exists(f"Pale_Chapters/{arc}"):
+    if not os.path.exists(f"Pale_Chapters{os.path.sep}{arc}"):
         return 1
-    for filename in os.listdir(f"Pale_Chapters/{arc}"):
+    for filename in os.listdir(f"Pale_Chapters{os.path.sep}{arc}"):
         if title in filename:
             return int(filename.split(" ")[0].replace("(","").replace(")","")) + 1
 
@@ -153,6 +151,7 @@ def download_chapters(url):
         url = chapter.next_link
         chap_num += 1
         print("wrote " + chapter.title)
+        # break
 
 if __name__ == "__main__":
   download_chapters(START_LINK)
