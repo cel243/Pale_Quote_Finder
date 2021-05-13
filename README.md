@@ -13,7 +13,7 @@ Run `pip install -r requirements.txt` to ensure you have all the necessary packa
 ## Pale Search Engine
 `open_pale` is just a script that makes opening chapters faster. EX: `./open_pale 1 4` opens 1.4 for example, and `./open_pale em 1 4` would open the extra material for 1.4. 
 
-`search_pale` is a script that makes searching for quotes in Pale super easy.
+`search_pale` is a script that makes searching for quotes in Pale using regular expressions super easy!
 
 **USE:** `./search_pale.sh <PATTERN> <FLAGS> <DIRECTORY> <GLOBAL PATTERN> <GLOBAL PATTERN FLAGS>`
 - `PATTERN` is the regular expression that you want the returned lines to match (**required**)
