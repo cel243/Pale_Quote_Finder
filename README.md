@@ -24,11 +24,14 @@ Run `pip install -r requirements.txt` to ensure you have all the necessary packa
 
 **EXAMPLES:**
 
-`./search_pale.sh "druid" "i"`
-- finds all occurrences of the word "druid" in Pale, ignoring case 
+`./search_pale.sh "Charles.*Cherrypop|Cherrypop.*Charles"` 
+- finds every time Cherrypop and Charles were mentioned in the same line
 
 `./search_pale.sh "Snowdrop" "" "[01][0-9]/*Avery*"`
 - finds all occurrences of the word "Snowdrop" in Avery chapters 
 
 `./search_pale.sh "[^a-z]Oni[^a-z]" "i" "" "Tymon" "i"`
 - finds all occurences of the word "Oni" (ignoring case, and ignoring words where 'oni' is emebedded in the middle) in chapters that also contain the word "Tymon" (also ignoring case)
+
+`./search_pale.sh " " "l" "EM/*.[a-z]*.*"`
+- retrieves a list of all of the Extra Materials whose accompanying chapter was an interlude
