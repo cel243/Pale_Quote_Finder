@@ -1,5 +1,5 @@
 # Quote Finder and Local Download of Wildbow's Pale
-This project is intended to be a more efficient and powerful way to search for quotes within Pale than Wordpress's built-in search feature. I don't own any of the materials downloaded by these scripts. Visit [palewebserial.wordpress.com](https://palewebserial.wordpress.com/) to learn more about Pale and support the author. 
+This project is intended to be an efficient and powerful way to search for quotes within Pale, to get around deficiencies in Wordpress's built in search feature (slow retrieval, inability to see the matching quote without clicking the chapter link, etc.). I don't own any of the materials downloaded by these scripts. Visit [palewebserial.wordpress.com](https://palewebserial.wordpress.com/) to learn more about Pale and support the author. 
 
 ## Setup
 Ensure you have Python installed. Run `pip install -r requirements.txt` to ensure you have all the necessary packages. 
