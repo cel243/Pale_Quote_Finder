@@ -47,17 +47,24 @@ def get_header(entry_contents):
     If no perspective is found, returns an empty string. Also returns
     the remainder of the page's contents after the perspective is found.
     """
+    perspective = None
+    remainder = entry_contents
     for i in range(len(entry_contents)):
         item = entry_contents[i]
         if item.name == "h1":
-            return item.get_text().strip(), entry_contents[i+1:]
+            if perspective is None:
+                perspective =  item.get_text().strip()
+                remainder = entry_contents[i+1:]
+            else:
+                return "All", remainder
         elif item.name == "p":
-            if "Avery" in item.get_text().strip() \
-                or "Lucy" in item.get_text().strip() \
-                or "Verona" in item.get_text().strip() \
-                or "Interlude" in item.get_text().strip():
-                return item.get_text().strip(), entry_contents[i+1:]
-    return "", entry_contents
+            if item.get_text().strip().lower() in {"avery", "verona", "lucy", "interlude", "prologue", "avery (again)", "verona (again)", "lucy (again)"}:
+                if perspective is None:
+                    perspective = item.get_text().strip()
+                    remainder = entry_contents[i+1:]
+                else:
+                    return "All", remainder
+    return perspective, remainder
 
 def get_chapter_text(entry_contents):
     """Returns the text of the chapter. Stylistics markings like itallics
@@ -104,7 +111,7 @@ def write_file(chapter):
     with open(f"{dir}{os.path.sep}{chapter.arc}{os.path.sep}({chap_num_str}) {chapter.title} ({chapter.perspective}).txt", 'w') as file:
         file.write(chapter.chapter_text)
 
-def get_previous_chap_num(page_text):
+def get_chap_num_from_context(page_text):
     """  """
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
     entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
@@ -118,7 +125,7 @@ def get_previous_chap_num(page_text):
                 if child.get_text().strip() == "Previous Chapter":
                     link =  child.get("href")
     if link is None:
-        return 1
+        return 1 #this is chapter 1 since there's no previous chapter link
 
     resp = requests.get(link)
     page_text = resp.text
@@ -127,8 +134,10 @@ def get_previous_chap_num(page_text):
     arc = re.findall("[0-9]+.", title)[0][:-1]
     if len(arc) < 2:
         arc = "0"+arc
+    ## look for the previous chapter in the file system and find its
+    ## chapter number 
     if not os.path.exists(f"Pale_Chapters{os.path.sep}{arc}"):
-        return 1
+        return 1 # no context found
     for filename in os.listdir(f"Pale_Chapters{os.path.sep}{arc}"):
         if title in filename:
             return int(filename.split(" ")[0].replace("(","").replace(")","")) + 1
@@ -143,7 +152,7 @@ def download_chapters(url):
         resp = requests.get(url)
         page_text = resp.text
         if start:
-            chap_num = get_previous_chap_num(page_text)
+            chap_num = get_chap_num_from_context(page_text)
             start = False
         chapter.chap_num = chap_num
         download_this_chapter(chapter, page_text)
