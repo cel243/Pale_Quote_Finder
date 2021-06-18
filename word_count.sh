@@ -1,22 +1,32 @@
 
 if [[ $# -eq 1 ]]; then
 
+arc=0
+if [[ $1 -lt 10 ]]; then 
+  arc="0$1"
+else 
+  arc="$1"
+fi
+
 echo " "
-echo "---ARC---|---WORDS---|"
-echo "---------|-----------|"
+echo "---CHAP---|---WORDS---|"
+echo "----------|-----------|"
 arc_total=0
 while IFS= read -r chapter; do
-  echo -n "  "
+  echo -n "   "
   echo -n $( egrep -o "$1\.[a-z0-9]+" <<< $chapter  )
   chap_num=$( egrep -o  "\.[a-z0-9]+" <<< $chapter | grep -v "txt" )
   if [[ ${#chap_num} -lt 3 ]]; then 
     echo -n " "
   fi
+  if [[ $1 -lt 10 ]]; then
+    echo -n " "
+  fi
   echo -n "  |  "
-  chapter_total=$( cat Pale_Chapters/$1/"$chapter" | wc -w )
+  chapter_total=$( cat Pale_Chapters/"$arc"/"$chapter" | wc -w )
   arc_total=$(( $arc_total + $chapter_total ));
   echo $chapter_total
-done < <( ls Pale_Chapters/$1/ )
+done < <( ls Pale_Chapters/"$arc"/ | sort )
 echo "----------------------"
 echo "ARC TOTAL: $arc_total"
 echo " "
