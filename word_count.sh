@@ -37,8 +37,9 @@ echo " "
 echo "-ARC-|--WORDS-----|"
 echo "-----|------------|"
 pale_total=0
+arc_total=0
 while IFS= read -r line; do
-  arc_total=0;
+  arc_total=0
   echo -n " "
   echo -n "$line  |  "
   while IFS= read -r chapter; do
@@ -46,10 +47,13 @@ while IFS= read -r line; do
     arc_total=$(( $arc_total + $chapter_total ));
   done < <( ls Pale_Chapters/"$line" )
   echo $arc_total
-  pale_total=$(( $pale_total + $arc_total ))
+  if [[ $line != "EM" ]]; then 
+    pale_total=$(( $pale_total + $arc_total ))
+  fi 
 done < <( ls Pale_Chapters/ )
 echo "-----------------------"
-echo "TOTAL WORDS: $pale_total"
+echo "STORY WORDS: $pale_total (word count without EM)"
+echo "TOTAL WORDS: $(( $pale_total + $arc_total ))"
 echo " "
 
 fi 
