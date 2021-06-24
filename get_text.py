@@ -38,7 +38,7 @@ def get_next_link(entry_contents):
         item = entry_contents[i]
         if type(item) == bs4.element.Tag:
             for child in item.findChildren("a" , recursive=True):
-                if child.get_text().strip() == "Next Chapter":
+                if child.get_text().strip() in {"Next Chapter", "Nex Chapr"}:
                     return child.get("href"), entry_contents[i+1:]
     return None, entry_contents
 
@@ -58,9 +58,13 @@ def get_header(entry_contents):
             else:
                 return "All", remainder
         elif item.name == "p":
-            if item.get_text().strip().lower() in {"avery", "verona", "lucy", "interlude", "prologue", "avery (again)", "verona (again)", "lucy (again)"}:
+            if item.get_text().strip().lower() in {"avery", "verona", "lucy", 
+                "interlude", "interude", "prologue", "avery (again)", 
+                "verona (again)", "lucy (again)"}:
                 if perspective is None:
                     perspective = item.get_text().strip()
+                    if perspective == "Interude":
+                        perspective = "Interlude"
                     remainder = entry_contents[i+1:]
                 else:
                     return "All", remainder
@@ -73,7 +77,9 @@ def get_chapter_text(entry_contents):
     text=""
     for item in entry_contents:
         if item.name == "p":
-            if item.get_text().strip() in {"Next Chapter","Previous Chapter"}\
+            if item.get_text().strip() in {"Next Chapter", "Nex Chapr", 
+                "Next Chaptr", "Previs Chaptr", "Previus Chaptir", 
+                "Previous Chapter"}\
                 or "Last Thursday" in item.get_text():
                 continue
             else:
@@ -86,7 +92,11 @@ def download_this_chapter(chapter, page_text):
     of the next chapter, and the text of the chapter. Returns nothing
     but modifies `chapter`. """
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
-    chapter.title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text().split("|")[0]).strip().replace("  "," ")
+    if "12a" in soup.title.get_text():
+        chapter.title = "False Moves 12.a"
+    else:
+        chapter.title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
+                          .split("|")[0]).strip().replace("  "," ")
     chapter.arc = re.findall("[0-9]+.", chapter.title)[0][:-1]
     if len(chapter.arc) < 2:
         chapter.arc = "0"+chapter.arc
@@ -112,7 +122,11 @@ def write_file(chapter):
         file.write(chapter.chapter_text)
 
 def get_chap_num_from_context(page_text):
-    """  """
+    """ Investigates the previous chapter to find its title, and looks
+    for that chapter in the Pale_Chapters/ directory. If found, the
+    chapter number of this chapter is 1 + the chapter number of the 
+    previous chapter. If not found, the default assumption is that this is
+    chapter one. """
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
     entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
     entry_contents = entry.contents
@@ -122,7 +136,8 @@ def get_chap_num_from_context(page_text):
         item = entry_contents[i]
         if type(item) == bs4.element.Tag:
             for child in item.findChildren("a" , recursive=True):
-                if child.get_text().strip() == "Previous Chapter":
+                if child.get_text().strip() in {"Previous Chapter", 
+                                                "Previs Chaptr"}:
                     link =  child.get("href")
     if link is None:
         return 1 #this is chapter 1 since there's no previous chapter link
@@ -130,7 +145,11 @@ def get_chap_num_from_context(page_text):
     resp = requests.get(link)
     page_text = resp.text
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
-    title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text().split("|")[0]).strip().replace("  "," ")
+    if "12a" in soup.title.get_text():
+        title = "False Moves 12.a"
+    else: 
+        title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
+                  .split("|")[0]).strip().replace("  "," ")
     arc = re.findall("[0-9]+.", title)[0][:-1]
     if len(arc) < 2:
         arc = "0"+arc
