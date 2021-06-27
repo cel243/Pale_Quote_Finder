@@ -13,9 +13,8 @@ cd Pale_Chapters/
 
 if [[ $# -gt 3 ]]; then
   while IFS= read -r file; do
-      # echo $dir
       egrep --color=always -r$2  "$1" "$file" | grep "txt.." | grep --color=always ".*txt" | awk '{ print $0, "\n"}'
-  done < <(egrep -rl$5 "$4" ./$3 | sort )
+  done < <( eval "egrep -rl$5 '$4' ./$3" | sort )
 else
-  egrep --color=always -r$2  "$1" ./$3 | grep --color=always ".*txt" | sort -s -k 1,1 | awk '{ print $0, "\n"}'
+  eval "egrep --color=always -r$2  '$1' ./$3" | grep --color=always ".*txt" | sort -s -k 1,1 | awk '{ print $0, "\n"}'
 fi
