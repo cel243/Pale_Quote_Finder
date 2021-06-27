@@ -46,7 +46,7 @@ From these results, I can easily see that the first result was what I was lookin
 Now let's say that I want to read the rest of the conversation surrounding this moment. Since the results are dispalyed with chapter numbers, I see that my quote occurs 6.z. Then, I can then run:
 
 ```
-./open_pale 6 z
+./open_pale.sh 6 z
 ```
 
 Which opens chapter 6.z in a text file. Since the search results told me exactly the wording of the quote, I can simply `cmmd+F` to find the place in the chapter that I'm looking for.  
@@ -121,8 +121,8 @@ Similarly, you can use the "directory" argument to search only witin a chapter o
 ### Open Pale
 
 `open_pale` is just a script that makes opening chapters faster than finding and clicking on the files by hand.
-- `./open_pale 1 4` opens 1.4
-- `./open_pale em 1 4` would open the **extra material** for 1.4
+- `./open_pale.sh 1 4` opens 1.4
+- `./open_pale.sh em 1 4` would open the **extra material** for 1.4
 
 ### Chapter Perspective Count
 
@@ -131,7 +131,7 @@ Similarly, you can use the "directory" argument to search only witin a chapter o
 **SAMPLE OUTPUT**
 
 ```
-$ ./chapter_perspective_count
+$ ./chapter_perspective_count.sh
 
 ----- CHAPTERS ---- WORDS ----
 ----|----------|-------------
@@ -164,7 +164,7 @@ $ ./chapter_perspective_count
 **SAMPLE OUTPUT**
 
 ```
-$./word_count
+$./word_count.sh
 
 -ARC-|--WORDS-----|
 -----|------------|
