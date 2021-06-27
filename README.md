@@ -12,7 +12,7 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 
 `python em_download.py` downloads all the extra materials as raw text in Pale_Chapters/EM (it downloads both the page text and comment section transcript text. No images). You can download all the extra materials for the story or just one extra material at a time, see the in-file documentation.  
 
-**Run both of the above files with no arguments to download all of Pale. See the documentation in the files themselves to see other download options.**
+**Run both of the above commands with no arguments to download all of Pale. See the documentation in the files themselves to explore other download options.**
 
 ## Pale Quote Search Engine
 
@@ -23,9 +23,9 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 - `FLAGS` are the flags you want `egrep` to use (**optional**)
 - `DIRECTORY` is the directory you want to search in. Since chapters are grouped into folders by arc/extra material status, you can use this input to search only within a particular arc. Or, you can use this input to search only Avery chapters, or only interludes, etc. (**optional**)
 - `GLOBAL PATTERN` restricts the egrep results to only search files that contain this pattern. (**optional**)
-- `GLOBAL PATTERN FLAGS` are the flags you want to pass to egrep for this pattern (**optional**)
+- `GLOBAL PATTERN FLAGS` are the flags you want to pass to egrep for the global pattern (**optional**)
 
-### First, a Simple Workflow Example to Get Us Started
+### First, a Simple Workflow Example to Get Started
 
 (There will be more input/output examples below)
 
