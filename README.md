@@ -12,10 +12,9 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 
 `python em_download.py` downloads all the extra materials as raw text in Pale_Chapters/EM (it downloads both the page text and comment section transcript text. No images). You can download all the extra materials for the story or just one extra material at a time, see the in-file documentation.  
 
-**Run both of the above files with no arguments to download all of Pale. See the documentation in the files themselves to see other download options.**
+**Run both of the above commands with no arguments to download all of Pale. See the documentation in the files themselves to explore other download options.**
 
 ## Pale Quote Search Engine
-`open_pale` is just a script that makes opening chapters faster. EX: `./open_pale 1 4` opens 1.4 for example, and `./open_pale em 1 4` would open the extra material for 1.4. 
 
 `search_pale` is a script that makes searching for quotes in Pale using regular expressions super easy!
 
@@ -24,33 +23,94 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 - `FLAGS` are the flags you want `egrep` to use (**optional**)
 - `DIRECTORY` is the directory you want to search in. Since chapters are grouped into folders by arc/extra material status, you can use this input to search only within a particular arc. Or, you can use this input to search only Avery chapters, or only interludes, etc. (**optional**)
 - `GLOBAL PATTERN` restricts the egrep results to only search files that contain this pattern. (**optional**)
-- `GLOBAL PATTERN FLAGS` are the flags you want to pass to egrep for this pattern (**optional**)
+- `GLOBAL PATTERN FLAGS` are the flags you want to pass to egrep for the global pattern (**optional**)
 
-**EXAMPLES:**
+### First, a Simple Workflow Example to Get Started
 
-`./search_pale.sh "Charles.*Cherrypop|Cherrypop.*Charles"` 
-- finds every time Cherrypop and Charles were mentioned in the same line
+(There will be more input/output examples below)
+
+Let's say I want to find the moment that Nicolette Belanger brings Seth under her protection after he's forsworn. I remember that she used the word 'protect' (or possibly 'protection'?) as she made her declaraion, but I don't remember what order those words occurred in, and I don't remember what chapter it was, just that it occured somewhere in Arc 6, 7, or 8. 
+
+In this case, I could run the following command to search for lines in Arcs 6, 7, or 8 than contain both "Seth" and "protect": 
+
+```
+./search_pale.sh "Seth.*protect|protect.*Seth" "" "0[678]"
+```
+
+This will bring up the following results:
+
+<img src="https://user-images.githubusercontent.com/54676970/123558064-5bb09c80-d762-11eb-9f07-131acec89c27.png" alt="ex_1" width="700"/>
+
+From these results, I can easily see that the first result was what I was looking for!
+
+Now let's say that I want to read the rest of the conversation surrounding this moment. Since the results are dispalyed with chapter numbers, I see that my quote occurs 6.z. Then, I can then run:
+
+```
+./open_pale.sh 6 z
+```
+
+Which opens chapter 6.z in a text file. Since the search results told me exactly the wording of the quote, I can simply `cmmd+F` to find the place in the chapter that I'm looking for.  
+
+
+### Tips for Effective Quote-Finding
+
+**Use Regular Expressions to Search:**
+
+If you're not familiar with the syntax of regualr expressions, you can find a handy cheat sheet [here](https://web.mit.edu/hackl/www/lab/turkshop/slides/regex-cheatsheet.pdf). Some key tips:
+- First of all, if you aren't comfortable with regular expressions and don't want to learn, verbatim search (simply searching for the quote you want) works just fine
+- Use `.*` to match any sequence of characters. If you know that some keywords appear in a quote but you're not sure what happens between them, this comes in handy
+- Use `\b` to match words boundaries, for example, if you were looking for information on plicate spirits, a search for `plicate` would also match the word `implicate`, but `\bplicate\b` will match only `plicate`. 
+
+**Use Flags to Customize your Search:**
+
+The flags I use the most often are:
+- `i`: makes your search case-insensitive
+- `l` displays only the chapters matched, and not the lines themselves. This is a good way to get a sense for how many results your search will return, or which arcs to start looking in
+
+**Filter by Arc:**
+
+All of the pale chapters are placed in a directory per arc. For example, all of the Arc 1 chapters are in a directory `01/`. To search only for results in Arc 1, simply pass `"01"` as the third flag to `./search_pale`. 
+
+To search through multiple arcs at a time, you can use shell expansion. Ex: `./search_pale "<pattern>" "" "0[123]"` searches arcs 1, 2, and 3 for `<pattern>`. Brace exansion like `{01,02,03}` won't work, unfortunately. I might try to restructure my script later to allow for this. Sets suffice in most scenarios.
+
+**Filter by Perspective:**
+
+Every chapter file is annotated with the perspective (e.g. 'Verona', 'Interlude'). Then, you can use the 'directory' argument to filter by a particular persepctive. For example, to only search for quotes in chapters from Avery's perspective, use `./search_pale "<pattern>" "" "[01][0-9]/*Avery*"` (the `[01][0-9]` searches every arc, and the `*Avery*` matches only Avery chapters).
+
+**Search Only Within a Chapter:**
+
+Similarly, you can use the "directory" argument to search only witin a chapter or chapters, for example: `./search_pale "<pattern>" "" "01/*1.[56]*"` will search only chapters 1.5 and 1.6. 
+
+### Input/Output Examples
+
+**INPUT:**
+
+```
+./search_pale.sh "Seal of Solomon" "" "[01][0-9]/*Interlude*"
+```
+- Finds all occurrences of the phrase "Seal of Solomon" in interludes
 
 **OUTPUT:**
 
-<img src="https://user-images.githubusercontent.com/54676970/120935081-13f0a500-c6cf-11eb-82d9-dabb50f0fa42.png" alt="ex_1" width="700"/>
+<img src="https://user-images.githubusercontent.com/54676970/123557731-99142a80-d760-11eb-9ee1-9738e5f25d31.png" alt="ex_2" width="700"/>
 
-`./search_pale.sh "Snowdrop" "" "[01][0-9]/*Avery*"`
-- finds all occurrences of the word "Snowdrop" in Avery chapters 
+**INPUT:**
 
-**OUTPUT:** (only some results shown for brevity) 
-
-<img src="https://user-images.githubusercontent.com/54676970/120935121-3682be00-c6cf-11eb-8958-99435d01500b.png" alt="ex_2" width="700"/>
-
-`./search_pale.sh "[^a-z]Oni[^a-z]" "i" "" "Tymon" "i"`
-- finds all occurences of the word "Oni" (ignoring case, and ignoring words where 'oni' is emebedded in the middle) in chapters that also contain the word "Tymon" (also ignoring case)
+```
+./search_pale.sh "[^a-z]Oni[^a-z]" "i" "" "Tymon" "i"
+```
+- Finds all occurences of the word "Oni" (ignoring case, and ignoring words where 'oni' is emebedded in the middle) in chapters that also contain the word "Tymon" (also ignoring case). Note that I could have used `\b` instead of `[^a-z]`. 
 
 **OUTPUT:** (only some results shown for brevity) 
 
 <img src="https://user-images.githubusercontent.com/54676970/120935216-b01aac00-c6cf-11eb-8b19-13c30f508c63.png" alt="ex_3" width="700"/>
 
-`./search_pale.sh " " "l" "EM/*.[a-z]*.*"`
-- retrieves a list of all of the Extra Materials whose accompanying chapter was an interlude
+**INPUT:**
+
+```
+./search_pale.sh " " "l" "EM/*.[a-z]*.*"
+```
+- Retrieves a list of all of the Extra Materials whose accompanying chapter was an interlude
 
 **OUTPUT:**
 
@@ -58,11 +118,21 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 
 ## Other Scripts
 
-`./chapter_perspective_count.sh` Gives as overviews of the number of chapters per arc from each character's perspective, and the number of words per arc from each perspective, as well as story-level stats. 
+### Open Pale
+
+`open_pale` is just a script that makes opening chapters faster than finding and clicking on the files by hand.
+- `./open_pale.sh 1 4` opens 1.4
+- `./open_pale.sh em 1 4` would open the **extra material** for 1.4
+
+### Chapter Perspective Count
+
+`./chapter_perspective_count.sh` gives as overviews of the number of chapters per arc from each character's perspective, and the number of words per arc from each perspective, as well as story-level stats. 
 
 **SAMPLE OUTPUT**
 
 ```
+$ ./chapter_perspective_count.sh
+
 ----- CHAPTERS ---- WORDS ----
 ----|----------|-------------
  L: |    33    |   316114
@@ -87,11 +157,15 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 
 **Note that these word counts are different than the official spreadsheet. This is because I'm a bit less careful about what constitutes a "word." The word counts should be approximately correct.**
 
+### Word Count
+
 `./word_count.sh` Gives total word counts per arc and total EM word count, as well as total story word count. 
 
 **SAMPLE OUTPUT**
 
 ```
+$./word_count.sh
+
 -ARC-|--WORDS-----|
 -----|------------|
  00  |  7177
