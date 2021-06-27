@@ -71,7 +71,7 @@ The flags I use the most often are:
 
 All of the pale chapters are placed in a directory per arc. For example, all of the Arc 1 chapters are in a directory `01/`. To search only for results in Arc 1, simply pass `"01"` as the third flag to `./search_pale`. 
 
-To search through multiple arcs at a time, you can use shell expansion. Ex: `./search_pale "<pattern>" "" "0[123]"` searches arcs 1, 2, and 3 for `<pattern>`. Brace exansion like `{01,02,03}` won't work, unfortunately. I might try to restructure my script later to allow for this. Sets suffice in most scenarios.
+To search through multiple arcs at a time, you can use shell expansion. Ex: `./search_pale "<pattern>" "" "0[123]"` searches arcs 1, 2, and 3 for `<pattern>`. Brace exansion like `{01,02,03}` instead of `0[123]` will also work.
 
 **Filter by Perspective:**
 
@@ -79,7 +79,7 @@ Every chapter file is annotated with the perspective (e.g. 'Verona', 'Interlude'
 
 **Search Only Within a Chapter:**
 
-Similarly, you can use the "directory" argument to search only witin a chapter or chapters, for example: `./search_pale "<pattern>" "" "01/*1.[56]*"` will search only chapters 1.5 and 1.6. 
+Similarly, you can use the "directory" argument to search only witin a chapter or chapters, for example: `./search_pale "<pattern>" "" "01/*1.[56]*"` will search only chapters 1.5 and 1.6. You can also use brace expansion, like `./search_pale "<pattern>" "" "[01][0-9]/*{1.3,9.10}]*"`
 
 ### Input/Output Examples
 
