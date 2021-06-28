@@ -14,6 +14,24 @@ Since the purpose of the file download is quote-finding, all downloaded files ar
 
 **Run both of the above commands with no arguments to download all of Pale. See the documentation in the files themselves to explore other download options.**
 
+### Adding New Chapters and Extra Materials
+
+When a new chapter is released, there's no need to download all of Pale again. Simply run the following command to get the most recent chapter:
+
+```
+python get_text.py <link-to-chapter>
+```
+
+When a new extra material is released, run the following command to download it:
+
+```
+python em_download.py 'X.X'
+```
+
+Replace `'X.X'` with the chapter number that the extra material was for (e.g., the argument `'7.3'` downloads the 'Borrowed Eyes Comic' extra material). 
+
+**NOTE:** Unlike the chapter download script, this script fetches extra materials from the extra material table of contents page. Sometimes it takes a few days for this page to be updated with new releases, in which case the script will not be able to find the content. If you want the EM before that time, follow the instructions in the documentation inside the `em_download.py` file.
+
 ## Pale Quote Search Engine
 
 `search_pale` is a script that makes searching for quotes in Pale using regular expressions super easy!
