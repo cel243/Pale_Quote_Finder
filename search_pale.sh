@@ -6,14 +6,20 @@ if [[ $# -lt 1 ]]; then
   exit
 fi
 
-## ./search_pale "regex" files_to_search flags file_constraint constraint_flags
-
 export GREP_COLOR='1;36;40'
 cd Pale_Chapters/
 
 if [[ $# -gt 3 ]]; then
   while IFS= read -r file; do
+    if [[ "$2" == *l* ]]; then
+      flags=$( sed 's/l//' <<< "$2" )
+      if grep -q -E -r$flags  "$1" "$file"; then 
+        grep --color=always ".*txt" <<< "$file"
+        echo " "
+      fi
+    else
       egrep --color=always -r$2  "$1" "$file" | grep "txt.." | grep --color=always ".*txt" | awk '{ print $0, "\n"}'
+    fi
   done < <( eval "egrep -rl$5 \"$4\" ./$3" | sort )
 else
   eval "egrep --color=always -r$2  \"$1\" ./$3" | grep --color=always ".*txt" | sort -s -k 1,1 | awk '{ print $0, "\n"}'
