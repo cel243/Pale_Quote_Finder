@@ -99,6 +99,18 @@ Every chapter file is annotated with the perspective (e.g. 'Verona', 'Interlude'
 
 Similarly, you can use the "directory" argument to search only witin a chapter or chapters, for example: `./search_pale "<pattern>" "" "01/*1.[56]*"` will search only chapters 1.5 and 1.6. You can also use brace expansion, like `./search_pale "<pattern>" "" "[01][0-9]/*{1.3,9.10}]*"`
 
+**(IMPORTANT) A Note on Searches Involving Double-Quotes:**
+
+While you can use `'` to your heart's content, the character `"` can be a little weird and cause `EOF` errors. If you want to search for a line including the `"` character:
+- Escape the symbol with a `\`
+- Pass in a space character as the `GLOBAL PATTERN` argument
+
+**EX:** Instead of `./search_pale.sh '" Charles'`, do `./search_pale.sh '\" Charles' '' '' ' '` (note that in order to use the `GLOBAL PATTERN` argument, you have to pass in the `FLAGS` and `DIRECTORY` arguments, too)
+
+This will give you the expected results, since restricting your search to files containing a space is the same as searching all files. Introducing the space as global pattern simply forces the script to invoke the global pattern handler, which is implemented in a way that nullifies the problems introduced by the `"`. 
+
+If there are known errors with normal searching that are fixed by the global search method, why isn't the global search method default? Unfortunately, that method is noticeably slower, and I thought it wasn't worth slowing down all searches to handle one use case. 
+
 ### Input/Output Examples
 
 **INPUT:**
