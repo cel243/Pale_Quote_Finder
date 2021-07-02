@@ -8,9 +8,17 @@ Ensure you have Python installed. Run `pip install -r requirements.txt` to ensur
 
 Since the purpose of the file download is quote-finding, all downloaded files are text only, with no formatting beyond paragraph breaks. 
 
-`python get_text.py` downloads a local copy of every chapter of Pale in a directory Pale_Chapters/. The arcs are separated out into separate folders. Or, you can download fewer chapters by starting from a different link (see the documentation in the file). Each chapter is labeled with number, arc title, absolute chapter number, and perspective. 
+```$ python get_text.py``` 
 
-`python em_download.py` downloads all the extra materials as raw text in Pale_Chapters/EM (it downloads both the page text and comment section transcript text. No images). You can download all the extra materials for the story or just one extra material at a time, see the in-file documentation.  
+Downloads a local copy of every chapter of Pale in a directory `Pale_Chapters/`. This download will take a minute or so, so wait for the program to stop outputting text before checking to make sure the files downloaded successfully. The arcs are separated out into separate folders. You can download fewer chapters by starting from a different link (see the documentation in the file).
+
+Pale chapters are downloaded into `Pale_Chapters/<ARC_NUM>/(<ABSOLUTE_CHAP_NUM>) <ARC_NAME> <ARC_NUM>.<ARC_CHAP_NUM> (<PERSPECTIVE>).txt`. For example, chapter "False Moves 12.1" would be downloaded as `Pale_Chapters/12/(118) False Moves 12.1 (Verona).txt`.
+
+```$ python em_download.py``` 
+
+Downloads all the extra materials as raw text in `Pale_Chapters/EM` (it downloads both the page text and comment section transcript text. No images since the goal of this download is to find quotes). As with `get_text`, this download will take a minute. You can download all the extra materials for the story or just one extra material at a time, see the in-file documentation. 
+
+Extra Materials are downloaded as `Pale_Chapters/EM/(<EM NUMBER>) [<CHAPTER>] <TITLE>.txt`. For example, the "Path Practicalities" extra material will be downloaded as `Pale_Chapters/EM/(35) [9.3] Path Practicalities.txt`.
 
 **Run both of the above commands with no arguments to download all of Pale. See the documentation in the files themselves to explore other download options.**
 
@@ -21,6 +29,8 @@ When a new chapter is released, there's no need to download all of Pale again. S
 ```
 python get_text.py <link-to-chapter>
 ```
+
+**NOTE:** The absolute chapter numbering relies on the "Previous Chapter" link working. If you download a chapter and notice that it's been numbered as chapter "001" instead of 1 + the number of the previous chapter, this is probably because the link is broken. You can rename the file to number the chapter correctly, or wait until the link is fixed and run the script again for this chapter.
 
 When a new extra material is released, run the following command to download it:
 
@@ -98,6 +108,18 @@ Every chapter file is annotated with the perspective (e.g. 'Verona', 'Interlude'
 **Search Only Within a Chapter:**
 
 Similarly, you can use the "directory" argument to search only witin a chapter or chapters, for example: `./search_pale "<pattern>" "" "01/*1.[56]*"` will search only chapters 1.5 and 1.6. You can also use brace expansion, like `./search_pale "<pattern>" "" "[01][0-9]/*{1.3,9.10}]*"`
+
+**(IMPORTANT) A Note on Searches Involving Double-Quotes:**
+
+While you can use `'` to your heart's content, the character `"` can be a little weird and cause `EOF` errors. If you want to search for a line including the `"` character:
+- Escape the symbol with a `\`
+- Pass in a space character as the `GLOBAL PATTERN` argument
+
+**EX:** Instead of `./search_pale.sh '" Charles'`, do `./search_pale.sh '\" Charles' '' '' ' '` (note that in order to use the `GLOBAL PATTERN` argument, you have to pass in the `FLAGS` and `DIRECTORY` arguments, too)
+
+This will give you the expected results, since restricting your search to files containing a space is the same as searching all files. Introducing the space as global pattern simply forces the script to invoke the global pattern handler, which is implemented in a way that nullifies the problems introduced by the `"`. 
+
+If there are known errors with normal searching that are fixed by the global search method, why isn't the global search method default? Unfortunately, that method is noticeably slower, and I thought it wasn't worth slowing down all searches to handle one use case. 
 
 ### Input/Output Examples
 
