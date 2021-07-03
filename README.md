@@ -247,3 +247,31 @@ ARC TOTAL: 114150
 ```
 
 When passing in arc numbers, do **NOT** pad the arc numbers with zeros. For example, use `./word_count.sh 2` instead of `./word_count.sh 02`. 
+
+### Individual Counts
+
+`./individual_counts.sh` prints the word count for every know chapter and extra material, in the form `<word_count> -- <file_name>`, not sorted in any particular order.
+
+The idea behind this script is that it can be fed to other commands to easily get information about word count stats in Pale that aren't covered by the other two scripts listed above.
+
+**EXAMPLES:**
+
+```
+./individual_counts.sh | grep "Verona" | sort -n -r | head -3
+```
+
+This will print the top 3 longest Verona chapters:
+
+```
+   13679 -- (109) Dash to Pieces 11.6 (Verona).txt
+   13675 -- (102) One After Another 10.4 (Verona).txt
+   12973 -- (026) Out on a Limb 3.6 (Verona).txt
+```
+
+To get the top extra materials, we can cheat, and use the knowledge that all extra materials are save as files that contain the chapter they were posted after in square brackets (for example,  `(15) [3.9] SunnyDay Logs.txt`). So, we can do:
+
+```
+./individual_counts.sh | grep "\[" | sort -n -r | head -3
+```
+
+To get the top 3 longest extra materials. 
