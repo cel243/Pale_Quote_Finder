@@ -22,5 +22,16 @@ if [[ $# -gt 3 ]]; then
     fi
   done < <( eval "egrep -rl$5 \"$4\" ./$3" | sort )
 else
-  eval "egrep --color=always -r$2  \"$1\" ./$3" | grep "txt.." | grep --color=always ".*txt" | sort -s -k 1,1 | awk '{ print $0, "\n"}'
+  if [[ "$2" == *l* ]]; then
+    eval "egrep --color=always -r$2  \"$1\" ./$3" \
+      | grep --color=always ".*txt" \
+      | sort -s -k 1,1 \
+      | awk '{ print $0, "\n"}'
+  else
+    eval "egrep --color=always -r$2  \"$1\" ./$3" \
+      | grep "txt.." \
+      | grep --color=always ".*txt" \
+      | sort -s -k 1,1 \
+      | awk '{ print $0, "\n"}'
+  fi
 fi
