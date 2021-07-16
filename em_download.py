@@ -52,33 +52,46 @@ Writes one file per extra material to ./Pale_Chapters/EM/<em_name>.txt
 ########################################################################
 
 EXCEPTION_MAPPING = { '[0.0]' : (10, 1, {1 : [0]}, 1), 
-                              # (rank, reply depth, reply rank, max depth)
-                              # "rank" is the comment on the page that contains
-                              #     the comment section transcript, 0-indexed
-                              # "reply depth" is the number of levels deep
-                              #    into the replies of this comment to start
-                              #    recording the transcript 
-                              # "reply rank" maps a reply depth level to the 
-                              #    replies that we should consider at this 
+                              # (<rank>, 
+                              #  <transcript start depth>, 
+                              #  <reply filtering at depth>, 
+                              #  <max transcript depth>)
+                              #
+                              # <rank> 
+                              #     The comment on the page that contains
+                              #     the comment section transcript, 0-indexed.
+                              # <transcript start depth> 
+                              #    The number of levels deep into the 
+                              #    replies of this comment to start recording 
+                              #    the transcript.
+                              # <reply filtering at depth> 
+                              #    Maps a reply depth level to the 0-indexed
+                              #    replies that we should collect at this 
                               #    level. This will be consistent across 
                               #    "branches" of the reply tree. 
-                              # "max depth" is the max depth of replies we 
-                              #    consider
+                              # <max transcript depth>
+                              #    The max depth of replies we consider.
                       '[3.1]' : None, 
-                              # indicates I found a 'transcript', but 
-                              # there actually isn't one for this EM, so we
-                              # prevent that here. 
+                              # 'None' indicates I found a 'transcript', but 
+                              # there actually isn't one for this EM. Writing
+                              # None here prevent searching for a transcript
+                              # for this EM
                       '[5.2]' : (6, 0, None, 3),
                               # a reply rank of "None" means we aren't 
-                              # restricting which replies we consider.
+                              # restricting which replies we consider for
+                              # each level of collected replies
                               # Similarly, if a reply depth does not appear
                               # as a key in the mapping, but it *is* a reply
-                              # depth we consider, then we don't restrict. 
+                              # depth we consider, then we don't restrict
+                              # which comments we collect at that level
                       '[5.5]' : (0, 0, None, 3),
                       '[6.9]' : (8, 0, {1: [0,1]}, 1),
+                              # EX: at reply depth 1, only take the first and
+                              #     second comments
                       '[7.3]' : (0, 0, None, 3),
                       '[8.2]' : (0, 0, None, 2),
-                      '[9.9]' : None
+                      '[9.9]' : None,
+                      '[12.7]': (2, 0, None, 0)
 }
 
 #######################################################################
@@ -252,4 +265,4 @@ if __name__ == "__main__":
         ems = get_em_list()
         for em in ems:
             download_em(em)
-    # download_em(EM("https://palewebserial.wordpress.com/2021/05/06/11-2-spoilers-just-in-case/","(38) [11.2] Just in Case", "[11.2]"))
+    # download_em(EM("https://palewebserial.wordpress.com/2021/07/15/12-7-spoilers-knots-depressions/","(39) [12.7] Knots & Depressions", "[12.7]"))
