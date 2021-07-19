@@ -19,12 +19,44 @@ you can pass in a start link as an argument to the process.
     If you only want one specific chapter, that isn't the most recent one, 
     just add a break statement at the end of the while loop in
     download_chapters().
+
+Interludes are only marked with the actual character perspective if the 
+Interlude has been added to INTERLUDE_PERSPECTIVES below.
 """
 
 if len(sys.argv)<2:
     START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
 else:
     START_LINK = sys.argv[1]
+
+###############################################################################
+########## Add Interlude Perspectives Here ###################################
+INTERLUDE_PERSPECTIVES = {
+    'Lost For Words 1.z'     : 'Gabe',
+    'Stolen Away 2.z'        : 'Nicolette',
+    'Out on a Limb 3.z'      : 'Zed',
+    'Leaving a Mark 4.x'     : 'Snowdrop',
+    'Back Away 5.a'          : 'Clementine',
+    'Back Away 5.b'          : 'Daniel',
+    'Back Away 5.c'          : 'Clementine',
+    'Back Away 5.d'          : 'Pecker/Matthew/Miss',
+    'Cutting Class 6.z'      : 'Fernanda',
+    'Gone Ahead 7.a'         : 'Kevin',
+    'Gone Ahead 7.x'         : 'Alexander',
+    'Vanishing Point 8.a'    : 'Liberty',
+    'Shaking Hands 9.z'      : 'Tashlit',
+    'One After Another 10.a' : 'John',
+    'One After Another 10.b' : 'Cig',
+    'One After Another 10.c' : 'Chloe',
+    'One After Another 10.d' : 'Alpeana',
+    'One After Another 10.e' : 'Toadswallow',
+    'One After Another 10.z' : 'Edith',
+    'Dash to Pieces 11.z'    : 'Maricica',
+    # 12a (Cherrypop) handled separately
+    'False Moves 12.a'       : 'Witch Hunters',
+}
+###############################################################################
+###############################################################################
 
 class Chapter():
   def __init__(self, url):
@@ -38,14 +70,15 @@ def get_next_link(entry_contents):
         item = entry_contents[i]
         if type(item) == bs4.element.Tag:
             for child in item.findChildren("a" , recursive=True):
-                if child.get_text().strip() in {"Next Chapter", "Nex Chapr"}:
+                if child.get_text().strip() in {"Next Chapter", "ex Chapr"}:
                     return child.get("href"), entry_contents[i+1:]
     return None, entry_contents
 
-def get_header(entry_contents):
-    """Returns the perspective of this chapter (e.g. 'Interlude', 'Lucy').
+def get_header(entry_contents, chap_title):
+    """Returns the perspective of this chapter (e.g. 'Lucy').
     If no perspective is found, returns an empty string. Also returns
     the remainder of the page's contents after the perspective is found.
+    For Interludes, returns 'Interlude - <character>'
     """
     perspective = None
     remainder = entry_contents
@@ -64,7 +97,9 @@ def get_header(entry_contents):
                 if perspective is None:
                     perspective = item.get_text().strip()
                     if perspective == "Interude":
-                        perspective = "Interlude"
+                        perspective = "Interlude - Cherrypop"
+                    elif perspective == "Interlude":
+                        perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
                     remainder = entry_contents[i+1:]
                 else:
                     return "All", remainder
@@ -102,7 +137,7 @@ def download_this_chapter(chapter, page_text):
         chapter.arc = "0"+chapter.arc
     
     entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
-    chapter.perspective, entry_contents = get_header(entry.contents)
+    chapter.perspective, entry_contents = get_header(entry.contents, chapter.title)
     chapter.next_link, entry_contents = get_next_link(entry_contents)
     chapter.chapter_text = get_chapter_text(entry_contents)
 
@@ -160,7 +195,6 @@ def get_chap_num_from_context(page_text):
     for filename in os.listdir(f"Pale_Chapters{os.path.sep}{arc}"):
         if title in filename:
             return int(filename.split(" ")[0].replace("(","").replace(")","")) + 1
-
 
 def download_chapters(url):
     """Retrieve and write all Pale chapters starting at `url`."""
