@@ -84,11 +84,14 @@ def get_header(entry_contents, chap_title):
     remainder = entry_contents
     for i in range(len(entry_contents)):
         item = entry_contents[i]
+        # Sometimes perspective headers are <h1> elements, and sometimes they're
+        # <p> elements. <h1> elements are always perspective markers.
         if item.name == "h1":
             if perspective is None:
                 perspective =  item.get_text().strip()
                 remainder = entry_contents[i+1:]
             else:
+                # Multiple perspectives found.
                 return "All", remainder
         elif item.name == "p":
             if item.get_text().strip().lower() in {"avery", "verona", "lucy", 
@@ -97,11 +100,13 @@ def get_header(entry_contents, chap_title):
                 if perspective is None:
                     perspective = item.get_text().strip()
                     if perspective == "Interude":
+                        # Fix Cherry's spelling.
                         perspective = "Interlude - Cherrypop"
                     elif perspective == "Interlude":
                         perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
                     remainder = entry_contents[i+1:]
                 else:
+                    # Multiple perspectives found.
                     return "All", remainder
     return perspective, remainder
 
@@ -116,9 +121,14 @@ def get_chapter_text(entry_contents):
                 "Next Chaptr", "Previs Chaptr", "Previus Chaptir", 
                 "Previous Chapter"}\
                 or "Last Thursday" in item.get_text():
+                # The next/previous chapter links are paragraphs on the page,
+                # but should not be included in the chapter text.
                 continue
             else:
+                # Otherwise, append this text.
                 text+=item.get_text()+"\n\n"
+    # Fix special curly quotes before returning because they make searching
+    # hard.
     return text.replace('’', "'").replace("”", '"').replace("“", '"')
 
 def download_this_chapter(chapter, page_text):
@@ -128,6 +138,7 @@ def download_this_chapter(chapter, page_text):
     but modifies `chapter`. """
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
     if "12a" in soup.title.get_text():
+        # Fix Cherry's spelling.
         chapter.title = "False Moves 12.a"
     else:
         chapter.title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
@@ -165,7 +176,8 @@ def get_chap_num_from_context(page_text):
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
     entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
     entry_contents = entry.contents
-
+    
+    # First, get the link to the previous chapter.
     link = None
     for i in range(len(entry_contents)):
         item = entry_contents[i]
@@ -177,19 +189,35 @@ def get_chap_num_from_context(page_text):
     if link is None:
         return 1 #this is chapter 1 since there's no previous chapter link
 
+    # Parse the page text for the previous chapter to find the title
+    # of that chapter (e.g. Lost For Words 1.3)
     resp = requests.get(link)
     page_text = resp.text
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
     if "12a" in soup.title.get_text():
+        # Title changed or else this chapter will not be recognized in the
+        # file system.
         title = "False Moves 12.a"
+    elif "12.a" in soup.title.get_text():
+        # Hard-coded because the duplicate 12.a causes 12.8 to be mis-numbered.
+        return 127
     else: 
-        title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
-                  .split("|")[0]).strip().replace("  "," ")
+        # Anything in the title that isn't a letter, number, or period gets
+        # replaced.
+        title = re.sub("[^A-Za-z\.0-9\ ]",
+                            "",
+                            soup.title.get_text().split("|")[0])\
+                       .strip()\
+                       .replace("  "," ")
+
+    # Since I'll be looking in a particular arc directory, I need to pad the
+    # arc number with a 0 if it's < 10
     arc = re.findall("[0-9]+.", title)[0][:-1]
     if len(arc) < 2:
         arc = "0"+arc
-    ## look for the previous chapter in the file system and find its
-    ## chapter number 
+
+    # look for the previous chapter in the file system and find its
+    # chapter number to get the number of this chapter.
     if not os.path.exists(f"Pale_Chapters{os.path.sep}{arc}"):
         return 1 # no context found
     for filename in os.listdir(f"Pale_Chapters{os.path.sep}{arc}"):
