@@ -39,7 +39,7 @@ INTERLUDE_PERSPECTIVES = {
     'Back Away 5.a'          : 'Clementine',
     'Back Away 5.b'          : 'Daniel',
     'Back Away 5.c'          : 'Clementine',
-    'Back Away 5.d'          : 'Pecker/Matthew/Miss',
+    'Back Away 5.d'          : 'Pecker-Matthew-Miss',
     'Cutting Class 6.z'      : 'Fernanda',
     'Gone Ahead 7.a'         : 'Kevin',
     'Gone Ahead 7.x'         : 'Alexander',
@@ -54,6 +54,7 @@ INTERLUDE_PERSPECTIVES = {
     'Dash to Pieces 11.z'    : 'Maricica',
     # 12a (Cherrypop) handled separately
     'False Moves 12.a'       : 'Witch Hunters',
+    'False Moves 12.z'       : 'Reid'
 }
 ###############################################################################
 ###############################################################################
@@ -99,11 +100,22 @@ def get_header(entry_contents, chap_title):
                 "verona (again)", "lucy (again)"}:
                 if perspective is None:
                     perspective = item.get_text().strip()
+                    # If perspective is an interlude, more work is needed to
+                    # add the true chapter perspective.
                     if perspective == "Interude":
                         # Fix Cherry's spelling.
                         perspective = "Interlude - Cherrypop"
                     elif perspective == "Interlude":
-                        perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
+                        if chap_title in INTERLUDE_PERSPECTIVES:
+                            perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
+                        else:
+                            raise Exception(" ***********\n" + \
+                                "There is no interlude perspective " + \
+                                "specified yet for " + chap_title + \
+                                ". Please open get_text.py and map this " + \
+                                "chapter to a perspective in the map " + \
+                                "INTERLUDE_PERSPECTIVES, near the top of " + \
+                                "the file.")
                     remainder = entry_contents[i+1:]
                 else:
                     # Multiple perspectives found.
@@ -141,29 +153,41 @@ def download_this_chapter(chapter, page_text):
         # Fix Cherry's spelling.
         chapter.title = "False Moves 12.a"
     else:
+        # Normal page title looks like "Lost For Word 1.3 | Pale". 
+        # Get the part before the "|" and remove any special characters.
         chapter.title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
                           .split("|")[0]).strip().replace("  "," ")
+    
+    # If the chapter arc is less than 2 characters, it's necessary to pad
+    # the number with a 0 so the length is consistent.
     chapter.arc = re.findall("[0-9]+.", chapter.title)[0][:-1]
     if len(chapter.arc) < 2:
         chapter.arc = "0"+chapter.arc
     
     entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
+
+    # Populate chapter perspective, nex link, and chapter text.
     chapter.perspective, entry_contents = get_header(entry.contents, chapter.title)
     chapter.next_link, entry_contents = get_next_link(entry_contents)
     chapter.chapter_text = get_chapter_text(entry_contents)
 
 def write_file(chapter):
     """Write chapter to Pale_Chapters/"""
+    # Step 1: Create directory if it doesn't exist.
     dir = 'Pale_Chapters'
     if not os.path.exists(dir):
         os.mkdir(dir)
     if not os.path.exists(f"{dir}{os.path.sep}{chapter.arc}"):
         os.mkdir(f"{dir}{os.path.sep}{chapter.arc}")
+    
+    # Step 2: Pad chapter number to 3 characters.
     chap_num_str = str(chapter.chap_num)
     if chapter.chap_num < 100:
         chap_num_str = "0" + chap_num_str
     if chapter.chap_num < 10:
         chap_num_str = "0" + chap_num_str
+    
+    # Step 3: Write chapter contents.
     with open(f"{dir}{os.path.sep}{chapter.arc}{os.path.sep}({chap_num_str}) {chapter.title} ({chapter.perspective}).txt", 'w') as file:
         file.write(chapter.chapter_text)
 
