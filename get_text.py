@@ -43,7 +43,7 @@ INTERLUDE_PERSPECTIVES = {
     'Cutting Class 6.z'      : 'Fernanda',
     'Gone Ahead 7.a'         : 'Kevin',
     'Gone Ahead 7.x'         : 'Alexander',
-    'Vanishing Point 8.a'    : 'Liberty',
+    'Vanishing Points 8.a'    : 'Liberty',
     'Shaking Hands 9.z'      : 'Tashlit',
     'One After Another 10.a' : 'John',
     'One After Another 10.b' : 'Cig',
