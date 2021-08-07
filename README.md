@@ -1,4 +1,4 @@
-# Quote Finder and Local Download of Wildbow's Pale
+# Quote Finder for Wildbow's Pale
 This project is intended to be an efficient way to search for quotes within Pale, to get around deficiencies in Wordpress's built in search feature (slow retrieval, inability to see the matching quote without clicking the chapter link, etc.). I don't own any of the materials downloaded by these scripts. Visit [palewebserial.wordpress.com](https://palewebserial.wordpress.com/) to learn more about Pale and support the author. 
 
 ## Setup
