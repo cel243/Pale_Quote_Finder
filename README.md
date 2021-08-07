@@ -1,5 +1,5 @@
 # Quote Finder and Local Download of Wildbow's Pale
-This project is intended to be an efficient and powerful way to search for quotes within Pale, to get around deficiencies in Wordpress's built in search feature (slow retrieval, inability to see the matching quote without clicking the chapter link, etc.). I don't own any of the materials downloaded by these scripts. Visit [palewebserial.wordpress.com](https://palewebserial.wordpress.com/) to learn more about Pale and support the author. 
+This project is intended to be an efficient way to search for quotes within Pale, to get around deficiencies in Wordpress's built in search feature (slow retrieval, inability to see the matching quote without clicking the chapter link, etc.). I don't own any of the materials downloaded by these scripts. Visit [palewebserial.wordpress.com](https://palewebserial.wordpress.com/) to learn more about Pale and support the author. 
 
 ## Setup
 Ensure you have Python installed. Run `pip install -r requirements.txt` to ensure you have all the necessary packages. 
@@ -20,7 +20,7 @@ Downloads all the extra materials as raw text in `Pale_Chapters/EM` (it download
 
 Extra Materials are downloaded as `Pale_Chapters/EM/(<EM NUMBER>) [<CHAPTER>] <TITLE>.txt`. For example, the "Path Practicalities" extra material will be downloaded as `Pale_Chapters/EM/(35) [9.3] Path Practicalities.txt`.
 
-**Run both of the above commands with no arguments to download all of Pale. See the documentation in the files themselves to explore other download options.**
+**Run both of the above commands with no arguments to download all of Pale. See below to explore other download options.**
 
 ### Adding New Chapters and Extra Materials
 
@@ -31,6 +31,8 @@ python get_text.py <link-to-chapter>
 ```
 
 **NOTE:** The absolute chapter numbering relies on the "Previous Chapter" link working. If you download a chapter and notice that it's been numbered as chapter "001" instead of 1 + the number of the previous chapter, this is probably because the link is broken. You can rename the file to number the chapter correctly, or wait until the link is fixed and run the script again for this chapter.
+
+**IMPORTANT:** If the new chapter is an interlude, the download will fail unless you add the perspective of that interlude to the `INTERLUDE_PERSPECTIVES` mapping first, in `get_text.py` (this variable is clearly marked near the top of the file, just add an entry mapping the chapter title to the perspective the chapter is from).
 
 When a new extra material is released, run the following command to download it:
 
