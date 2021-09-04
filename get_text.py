@@ -23,7 +23,6 @@ you can pass in a start link as an argument to the process.
 Interludes are only marked with the actual character perspective if the 
 Interlude has been added to INTERLUDE_PERSPECTIVES below.
 """
-
 if len(sys.argv)<2:
     START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
 else:
@@ -54,7 +53,8 @@ INTERLUDE_PERSPECTIVES = {
     'Dash to Pieces 11.z'    : 'Maricica',
     # 12a (Cherrypop) handled separately
     'False Moves 12.a'       : 'Witch Hunters',
-    'False Moves 12.z'       : 'Reid'
+    'False Moves 12.z'       : 'Reid',
+    'B1'                     : 'Ray'
 }
 ###############################################################################
 ###############################################################################
@@ -80,6 +80,7 @@ def get_header(entry_contents, chap_title):
     If no perspective is found, returns an empty string. Also returns
     the remainder of the page's contents after the perspective is found.
     For Interludes, returns 'Interlude - <character>'
+    'Break' chapters should not call this function.
     """
     perspective = None
     remainder = entry_contents
@@ -157,17 +158,40 @@ def download_this_chapter(chapter, page_text):
         # Get the part before the "|" and remove any special characters.
         chapter.title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
                           .split("|")[0]).strip().replace("  "," ")
+
+        # Check if this is a 'Break' chapter, and apply a special naming
+        # rule if so. Otherwise, the chapter title is just the title
+        # of the page (e.g. 'Summer Break 13.4')
+        if len(re.findall("^Break [0-9]+$", chapter.title)) > 0:
+            break_num = re.findall("[0-9]+$", chapter.title)[0]
+            chapter.title = f"Summer Break 13.B{break_num}"
     
     # If the chapter arc is less than 2 characters, it's necessary to pad
     # the number with a 0 so the length is consistent.
-    chapter.arc = re.findall("[0-9]+.", chapter.title)[0][:-1]
+    chapter.arc = re.findall("[0-9]+\.", chapter.title)[0][:-1]
     if len(chapter.arc) < 2:
         chapter.arc = "0"+chapter.arc
     
-    entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4]
+    entry_contents = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4].contents
 
     # Populate chapter perspective, nex link, and chapter text.
-    chapter.perspective, entry_contents = get_header(entry.contents, chapter.title)
+    # 'Break' chapters get a special perspective rule.
+    if "13.B" in chapter.title:
+        break_chap_name = re.findall("B[0-9]+", chapter.title)[0]
+        if break_chap_name in INTERLUDE_PERSPECTIVES:
+            chapter.perspective = ("Interlude - " + 
+                            INTERLUDE_PERSPECTIVES[break_chap_name])
+        else:
+            raise Exception(" ***********\n" + \
+                "There is no perspective " + \
+                "specified yet for " + break_chap_name + \
+                ". Please open get_text.py and map this " + \
+                "chapter to a perspective in the map " + \
+                "INTERLUDE_PERSPECTIVES, near the top of " + \
+                "the file.")
+    else:
+        chapter.perspective, entry_contents = get_header(entry_contents, chapter.title)
+
     chapter.next_link, entry_contents = get_next_link(entry_contents)
     chapter.chapter_text = get_chapter_text(entry_contents)
 
