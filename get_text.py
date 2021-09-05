@@ -242,21 +242,19 @@ def get_chap_num_from_context(page_text):
     resp = requests.get(link)
     page_text = resp.text
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
-    if "12a" in soup.title.get_text():
+    title = re.sub("[^A-Za-z\.0-9\ ]","",soup.title.get_text()
+                          .split("|")[0]).strip().replace("  "," ")
+    if "12a" in title:
         # Title changed or else this chapter will not be recognized in the
         # file system.
         title = "False Moves 12.a"
-    elif "12.a" in soup.title.get_text():
+    elif "12.a" in title:
         # Hard-coded because the duplicate 12.a causes 12.8 to be mis-numbered.
         return 127
-    else: 
-        # Anything in the title that isn't a letter, number, or period gets
-        # replaced.
-        title = re.sub("[^A-Za-z\.0-9\ ]",
-                            "",
-                            soup.title.get_text().split("|")[0])\
-                       .strip()\
-                       .replace("  "," ")
+    elif len(re.findall("^Break [0-9]+$", title)) > 0:
+        # Break chapter special case
+        break_num = re.findall("[0-9]+$", title)[0]
+        title = f"Summer Break 13.B{break_num}"
 
     # Since I'll be looking in a particular arc directory, I need to pad the
     # arc number with a 0 if it's < 10
