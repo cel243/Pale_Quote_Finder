@@ -54,7 +54,8 @@ INTERLUDE_PERSPECTIVES = {
     # 12a (Cherrypop) handled separately
     'False Moves 12.a'       : 'Witch Hunters',
     'False Moves 12.z'       : 'Reid',
-    'B1'                     : 'Ray'
+    'B1'                     : 'Ray',
+    'B2'                     : 'John'
 }
 ###############################################################################
 ###############################################################################
