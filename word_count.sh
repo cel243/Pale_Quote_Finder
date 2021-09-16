@@ -14,8 +14,8 @@ echo "----------|-----------|"
 arc_total=0
 while IFS= read -r chapter; do
   echo -n "   "
-  echo -n $( egrep -o "$1\.[a-z0-9]+" <<< $chapter  )
-  chap_num=$( egrep -o  "\.[a-z0-9]+" <<< $chapter | grep -v "txt" )
+  echo -n $( egrep -o "$1\.[a-zA-Z0-9]+" <<< $chapter  )
+  chap_num=$( egrep -o  "\.[a-zA-Z0-9]+" <<< $chapter | grep -v "txt" )
   if [[ ${#chap_num} -lt 3 ]]; then 
     echo -n " "
   fi
