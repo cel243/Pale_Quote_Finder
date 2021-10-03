@@ -35,6 +35,13 @@ while IFS= read -r line; do
       verona_total=$(( $verona_total +  3848 ));
       lucy_total=$(( $lucy_total + 7141 ));
     fi
+    if [[ "$chapter" == *"SB"* ]]; then
+      # echo "$chapter"
+      avery_total=$(( $avery_total + 3362 ));
+      verona_total=$(( $verona_total + 1818 ));
+      lucy_total=$(( $lucy_total + 672 ));
+      int_total=$(( $int_total + 5531 ));
+    fi
     if [[ "$chapter" == *Interlude* ]]; then
       # echo "$chapter"
       chapter_total=$( cat Pale_Chapters/"$line"/"$chapter" | wc -w )
@@ -102,6 +109,7 @@ while IFS= read -r line; do
         avery=$(( $avery + 1 ));
         verona=$(( $verona + 1 ));
         lucy=$(( $lucy + 1 ));
+        interlude=$(( $interlude + 1 ));
         a_word=$(( $a_word + 4678 ))
         v_word=$(( $v_word + 5282 ))
         l_word=$(( $l_word + 2956 ))
@@ -114,6 +122,17 @@ while IFS= read -r line; do
         a_word=$(( $a_word + 2185 ))
         v_word=$(( $v_word + 3848 ))
         l_word=$(( $l_word + 7141 ))
+      fi
+      if [[ "$chapter" == *"SB"* ]]; then
+        # echo "$chapter"
+        avery=$(( $avery + 1 ));
+        verona=$(( $verona + 1 ));
+        lucy=$(( $lucy + 1 ));
+        interlude=$(( $interlude + 1 ));
+        a_word=$(( $a_word + 3362 ));
+        v_word=$(( $v_word + 1818 ));
+        l_word=$(( $l_word + 672 ));
+        i_word=$(( $i_word + 5531 ));
       fi
       if [[ "$chapter" == *"Interlude"* ]]; then
         interlude=$(( $interlude + 1 ));
