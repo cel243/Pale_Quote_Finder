@@ -56,7 +56,9 @@ INTERLUDE_PERSPECTIVES = {
     'False Moves 12.z'       : 'Reid',
     'B1'                     : 'Ray',
     'B2'                     : 'John',
-    'B3'                     : 'Alabaster'
+    'B3'                     : 'Alabaster',
+    'B4'                     : 'Cagerattler-Frances-Plath',
+    'B5'                     : 'John'
 }
 ###############################################################################
 ###############################################################################
@@ -167,10 +169,13 @@ def download_this_chapter(chapter, page_text):
         if len(re.findall("^Break [0-9]+$", chapter.title)) > 0:
             break_num = re.findall("[0-9]+$", chapter.title)[0]
             chapter.title = f"Summer Break 13.B{break_num}"
+        elif chapter.title == "Summer Break":
+            chapter.title = f"Summer Break 13.SB"
     
     # If the chapter arc is less than 2 characters, it's necessary to pad
     # the number with a 0 so the length is consistent.
     chapter.arc = re.findall("[0-9]+\.", chapter.title)[0][:-1]
+
     if len(chapter.arc) < 2:
         chapter.arc = "0"+chapter.arc
     
@@ -191,6 +196,8 @@ def download_this_chapter(chapter, page_text):
                 "chapter to a perspective in the map " + \
                 "INTERLUDE_PERSPECTIVES, near the top of " + \
                 "the file.")
+    elif "SB" in chapter.title:
+        chapter.perspective = "All-Jas"
     else:
         chapter.perspective, entry_contents = get_header(entry_contents, chapter.title)
 
