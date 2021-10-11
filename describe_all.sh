@@ -96,7 +96,7 @@ echo "(048) Back Away 5.c (Interlude - Clementine): Clem talks to Guilherme in t
 
 echo "(049) Back Away 5.5 (Verona): The girls follow up on the trail of the car with the Carmine Beast's remains, with the help of Clementine, then they help to shore up the perimeter, while Edith dispatches Others. Verona goes back to her house by herself, speaks with her dad, draws a diagram to make him think it was a dream, and leaves again."
 
-echo "(050) Back Away 5.d (Interlude - Pecker:Matthew:Miss): Toadswallow and Bluntmunch recruit new goblins. Edith and Matthew get a power source from Zed, then Matthew fights a group of invading elemental vessels with the Doom. Alpeana and Maricica give the rundown to the many-eyed Other Verona met, she is joining Kennet. Miss, in the Paths, doesn’t reach a compromise with a Finder who attempts to bind her and perishes, then manages to quickly speak with the girls. Miss explains Others never expected humanity to last, and how deals struck long ago are harming them now."
+echo "(050) Back Away 5.d (Interlude - Pecker-Matthew-Miss): Toadswallow and Bluntmunch recruit new goblins. Edith and Matthew get a power source from Zed, then Matthew fights a group of invading elemental vessels with the Doom. Alpeana and Maricica give the rundown to the many-eyed Other Verona met, she is joining Kennet. Miss, in the Paths, doesn’t reach a compromise with a Finder who attempts to bind her and perishes, then manages to quickly speak with the girls. Miss explains Others never expected humanity to last, and how deals struck long ago are harming them now."
 
 echo "(051) Cutting Class 6.1 (Lucy): Back in school, the trio attends Durocher's lesson about binding. They meet Kass, Raquel and Yadira, learn that at least one of them trained with Bristow."
 
@@ -108,19 +108,19 @@ echo "(054) Cutting Class 6.4 (Lucy): The girls decide that Lucy is the one that
 
 echo "(055) Cutting Class 6.5 (Avery): Verona shows Avery her implement ideas for Lucy. The girls win a ticket to decide which Faerie court they'll all visit on a field trip, as part of a prize in the class about coup & claim that Alexander “stole” from Bristow. The trio witnesses the ritual for Jessica to find her cousin's echo, Shellie disrupts the ritual, and Jessica storms out. Shellie delivers a concerning message to Nicolette, The girls decide not to rally behind Alexander."
 
-echo "(056) Cutting Class 6.6 (Verona): Avery messages Sheridan about her \"talk\" with their dad. The girls talk to Matthew and Edith about using an Alcazar to get stuff for Lucy's implement, recruit Zed to be their guardian during the ritual. They enter photos and take some components, as well as finding some clues."
+echo "(056) Cutting Class 6.6 (Verona): Avery messages Sheridan about her 'talk' with their dad. The girls talk to Matthew and Edith about using an Alcazar to get stuff for Lucy's implement, recruit Zed to be their guardian during the ritual. They enter photos and take some components, as well as finding some clues."
 
 echo "(057) Cutting Class 6.7 (Lucy): Lucy prepares for and starts the Implementum ritual; there are flashbacks showing a class on human binding conducted by Bristow, in which students attempt to bind one another in matchups. The girls negotiated with Bristow to be left alone doing the Implementum ritual for days while war between Alexander and Bristow broke out. They hole into the workshop where Lucy is doing the ritual and stay there."
 
 echo "(058) Cutting Class 6.8 (Lucy (Again)): Lucy completes the ritual. Verona and Avery tell her that Bristow has taken over the BHI, with Alexander’s apprentices all defecting to his side, except Wye."
 
-echo "(059) Cutting Class 6.9 (Avery): The girls talk to Tymon and interact with Silas and Jarvis, both in Bristow's camp. They go into town and find the students that didn't want to be at school because of the \"war\". They learn some of what happened. Bristow loyalists come to tell everyone that they're expected at dinner. The girls decide they need to do something."
+echo "(059) Cutting Class 6.9 (Avery): The girls talk to Tymon and interact with Silas and Jarvis, both in Bristow's camp. They go into town and find the students that didn't want to be at school because of the 'war'. They learn some of what happened. Bristow loyalists come to tell everyone that they're expected at dinner. The girls decide they need to do something."
 
 echo "(060) Cutting Class 6.z (Interlude - Fernanda): Flashback. Chase talks to Fernanda. Fernanda and Laila make promises to each other. In Alexander's office, he gathers his apprentices and some witnesses to see who would defect for Bristow. Nicolette, Tanner, and Chase do. Seth is unassertive, and Alexander forswears him. Tensions in the school rise, and Alexander leaves."
 
 echo "(061) Gone Ahead 7.1 (Verona): The girls and some of the other students discuss what to do (and the subject of Oni is finally discussed). They summon some Kennet Others and head back to school, briefly encountering Ted on the way."
 
-echo "(062) Gone Ahead 7.2 (Lucy): The girls and allies scout Bristow’s construction site at school, where goblins cause some commotion and leave a \"backdoor\" for later. They all head back to the workshop where the \"resistance\" is staying. The nettlewisp goes off while they're sleeping, and the girls are warned that Nicolette will be forced to trigger anti-augury curses if they keep using it."
+echo "(062) Gone Ahead 7.2 (Lucy): The girls and allies scout Bristow’s construction site at school, where goblins cause some commotion and leave a 'backdoor' for later. They all head back to the workshop where the 'resistance' is staying. The nettlewisp goes off while they're sleeping, and the girls are warned that Nicolette will be forced to trigger anti-augury curses if they keep using it."
 
 echo "(063) Gone Ahead 7.3 (Avery): The girls look for a place outside the school to send Alpeana away to do stuff. Avery and some others get trapped by a nasty arena-making Other, and Avery manages to hold out long enough for Lucy and Verona to come in with the red button. Later, Nicolette comes into their room and wants to talk."
 
@@ -156,7 +156,7 @@ echo "(078) Vanishing Points 8.6 (Verona): Field trip to the Bright Fall Faerie 
 
 echo "(079) Vanishing Points 8.7 (Avery): Avery gets paired with Fernanda. They ask one of the vendors about Maricica’s traps. Avery gets pulled into a fight with America. Nicolette reveals Musser is headmaster, and that she and Raymond know they had something to do with Alexander's disappearance, but don't care that much. Zed drives the girls back to Kennet."
 
-echo "(080) Vanishing Points 8.8 (All): The girls get home. Lucy meets Alyssa and goes for dessert with her mom. Snowdrop chats with Melissa at Louise's place and tells stories to the goblins. Verona improves her weird relationship with Jeremy and \"stands up\" a bit to her dad. Avery comes out to her parents."
+echo "(080) Vanishing Points 8.8 (All): The girls get home. Lucy meets Alyssa and goes for dessert with her mom. Snowdrop chats with Melissa at Louise's place and tells stories to the goblins. Verona improves her weird relationship with Jeremy and 'stands up' a bit to her dad. Avery comes out to her parents."
 
 echo "(081) Shaking Hands 9.1 (Lucy): Alpeana gives Lucy a traumatic nightmare and a warning from Rook. The trio meet Lis, then go on a council meeting. Matthew and Edith want them to stand down."
 
@@ -172,7 +172,7 @@ echo "(086) Shaking Hands 9.6 (Avery): Avery talks to Melissa and gets informati
 
 echo "(087) Shaking Hands 9.7 (Lucy): Lucy and Verona escape Brett and go to Matthew and Edith's place. Lucy confronts them about their attitude. They interrogate McKay and learn more about his companions. Lucy and Verona go to look for the heavy Other."
 
-echo "(088) Shaking Hands 9.8 (Avery): Avery prepares for her upcoming Finder trip. Verona names Peckersnot. The girls make \"compasses\" to track the oily shadow Other, and discover that something in the south-east end of town might be muddling that signal, decide to investigate it themselves."
+echo "(088) Shaking Hands 9.8 (Avery): Avery prepares for her upcoming Finder trip. Verona names Peckersnot. The girls make 'compasses' to track the oily shadow Other, and discover that something in the south-east end of town might be muddling that signal, decide to investigate it themselves."
 
 echo "(089) Shaking Hands 9.9 (Verona): The girls set up protections for their families at their houses. Verona has a major fight with her dad, he breaks her stuff, she turns into a cat to meet Lucy and Avery. They find the cabin, with the furs, and Edith is there."
 
@@ -194,7 +194,7 @@ echo "(097) One After Another 10.c (Interlude - Chloe): Chloe does some housewor
 
 echo "(098) One After Another 10.2 (Lucy): Lucy has a talk with Verona's dad on her way to meet Avery. Lucy and Avery get Melissa from a group of drinking youths. They go to Edith's cabin, where Melissa discovers a syringe. They meet the ghouls, call John, and keep running from the Witch Hunter. Melissa stands between the Witch Hunter and Lucy."
 
-echo "(099) One After Another 10.d (Interlude - Alpeana): Alpeana creates a collective nightmare of everyone in the motel where the Witch Hunter is staying, \"explores\" him through nightmares with the secondary goal of destroying him. The Witch Hunter is not destroyed, but she has some insights."
+echo "(099) One After Another 10.d (Interlude - Alpeana): Alpeana creates a collective nightmare of everyone in the motel where the Witch Hunter is staying, 'explores' him through nightmares with the secondary goal of destroying him. The Witch Hunter is not destroyed, but she has some insights."
 
 echo "(100) One After Another 10.e (Interlude - Toadswallow): Toadswallow's birth and formative experiences. Crooked Rook tricks him into revealing some of his plans for a goblin market in Kennet within earshot of Lucy."
 
@@ -220,7 +220,7 @@ echo "(110) Dash to Pieces 11.7 (Lucy): Lucy trains with Guilherme, encounters a
 
 echo "(111) Dash to Pieces 11.8 (Avery): The conversation with Rook continues. Avery chats with Liberty about hiring her. "
 
-echo "(112) Dash to Pieces 11.9 (Verona): Verona tests her detection bracelets while taking care of an echo. She does a bit of alchemy, prepares a bottle of \"not smoke\", and visits Avery for moral support."
+echo "(112) Dash to Pieces 11.9 (Verona): Verona tests her detection bracelets while taking care of an echo. She does a bit of alchemy, prepares a bottle of 'not smoke', and visits Avery for moral support."
 
 echo "(113) Dash to Pieces 11.10 (Avery): Verona and Avery discuss the Promenade with Declan after tutoring him with homework. Declan harasses Verona and Avery is angry that her father does little. They meet with Toadswallow and are asked to deal with an Other causing car problems."
 
@@ -292,15 +292,17 @@ echo "(146) Summer Break 13.B4 (Interlude - Cagerattler-Frances-Plath): The Witc
 
 echo "(147) Summer Break 13.13 (Avery): The girls have to decide whether to try to rescue Brie, who has been kidnapped by Maricica for the Choir's power, or to try to protect the Carmine furs, which are accessible to the conspirators via new city-spirit Lis. They run to the furs, but they're too late. The girls fight both Bluntmunch's fresh Dog Meat and Lis's interference as they race through Kennet to intercept Charles. The conspirators and the trio + Kennet Others face off outside the arena. Charles is able to sway Musser to join his side, which proves enough to turn the tide-- Charles enters the Carmine Contest. Maricica flits off, but before she leaves, she destroys Brie's bindings and releases the Hungry Choir, revealing that Charles is now able to control it using Yalda's cursed doll. Avery runs to try to get Yalda's ring to John, but the Ephemeral Bird swoops in, snatching it from her hands at the pivotal moment."
 
-echo "(148) Summer Break 13.B5 (Interlude - John).txt"
-echo "(149) Summer Break 13.SB (All-Jas).txt"
+echo "(148) Summer Break 13.B5 (Interlude - John): Lauren Snyder sacrifices herself so that John can defeat her demonic familiar. Reid is deeply affected by the scene, making important realizations about his life before allowing John to execute him. As John takes down his final opponent, Breastbiter, Charles enters the arena, decked out in the Carmine furs and backed by the Hungry Choir."
 
-echo "(150) Fall Out 14.1 (Avery).txt"
-echo "(151) Fall Out 14.2 (Lucy): "
+echo "(149) Summer Break 13.SB (All-Jas): The trio manages to steal Yalda's ring back from the Ephemeral Bird, with Verona injuring herself in the process. Meanwhile, Jasmine runs into trouble on her date with the Beautiful Man, and is saved by some of the Kenneteers' allies. The girls rush back to the arena, only to discover that it is too late to give the ring to John. Avery confesses to the gathered crowd that she plans to leave Kennet after things resolve. After a tense wait, the Carmine Contest concludes, and the Judges exit the arena accompanied by John's remaining soldiers...and the newly-risen Carmine Exile."
+
+echo "(150) Fall Out 14.1 (Avery): Avery moves into Thunder Bay. 'Welcome' committee Ann and Deb get her set up to meet the local Lord and the city's council, where Avery argues for why she should be allowed to stay in the city and is granted a probationary residency. We learn that Charles has begun his reign of terror, Gainsaying Practitioner children and old enemies."
+
+echo "(151) Fall Out 14.2 (Lucy): Lucy, still very much not okay after the events of the end of Summer, sees to some of the perimeter shrines (where she learns that Lis may be interfering with the perimeter), accompanied by John's old squad. She then attends her first day of school, only to find that Innocents are fleeing Kennet, shrinking the number of students. Verona never makes it to school. Lucy meets briefly with the Kennet Others, and later sees the now-freed Edith, who we learn has been terrorizing Matthew in his own home since she was released."
 
 
-echo "(01) [0.0] The Brochure.txt"
-echo "(02) [1.2] Notes on Others.txt"
+echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
+echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1.txt"
 echo "(04) [1.6] Flyer & App.txt"
 echo "(05) [1.8] Inventories.txt"
