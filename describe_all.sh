@@ -300,6 +300,17 @@ echo "(150) Fall Out 14.1 (Avery): Avery moves into Thunder Bay. 'Welcome' commi
 
 echo "(151) Fall Out 14.2 (Lucy): Lucy, still very much not okay after the events of the end of Summer, sees to some of the perimeter shrines (where she learns that Lis may be interfering with the perimeter), accompanied by John's old squad. She then attends her first day of school, only to find that Innocents are fleeing Kennet, shrinking the number of students. Verona never makes it to school. Lucy meets briefly with the Kennet Others, and later sees the now-freed Edith, who we learn has been terrorizing Matthew in his own home since she was released."
 
+echo "(152) Fall Out 14.3 (Verona): Verona leaves a body double in her place while she explores Kennet's new Knotted underworld, accompanied by Tashlit and Peckersnot. She establishes a shaky alliance with the Knotted school’s Vice President, rescues a very lost substitute teacher, and floats the idea of a Familiar bond to Tashlit."
+
+echo "(153) Fall Out 14.4 (Avery): Avery goes to school and discovers that some of her new friends are LGBT. She's asked by Deb to investigate a new Practitioner in the area, Franky, who she learns has been not-quite-Awakened by the Carmine Exile, seemingly set up to create a mess that would take out some of Musser’s allies."
+
+echo "(154) Fall Out 14.5 (Verona): Verona goes to (upper-Kennet) school, and recharges some with Sir and friends. Later, Miss alerts her to trouble in the Undercity, and Lucy tags along to help Verona deal with the situation. Things are tense between the two friends, and Verona ultimately loses her temper, sending Lucy away before dealing with the threat by herself."
+
+echo "(155) Fall Out 14.6 (Lucy): Lucy deals with normal school life, worried about Verona leaving the fetch in her place more and more in favor of handling the Undercity, and Jeremy confides in her that he’s feeling upset about being ignored by the fake Verona. Lucy visits Rook (along with some other Kennet Others) and discusses the plan going forward, as well as receiving some sage advice from Rook. Lucy deals with some Undercity denizens plaguing Innocent Kennet, and hands them off to Verona to handle, before heading to Guilherme’s cave to visit him for the first time after his fall to Winter. Finally, all three girls meet in a dream, and try to find a way forward together."
+
+echo "(156) Fall Out 14.z (Interlude - Basil Winters): Basil Winters visits Musser at the BHI, and a group of Practitioners plot together to take over all of the Carmine Exile’s domain with Lordships. They do several in a row before the Carmine intervenes, Gainsaying Milly Legendre before she can complete her ritual. Basil steps in, and although he appears to succeed in claiming the territory, Rook tricked Basil during the Lordship challenges, and unbeknownst to Musser’s allies, Bridge is now the true Lord."
+
+echo "(157) Playing a Part 15.1 (Verona): Verona deals with her dad as their social worker looks on with concern. Things go about as well as can be expected. Verona later rescues Matthew from a fight with Edith, who is still trying to get Matthew to give their marriage another chance. The duo head together to the Undercity to deal with some escaped Others, and commiserate over their difficult home situations."
 
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
