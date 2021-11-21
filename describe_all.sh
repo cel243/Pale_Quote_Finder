@@ -312,6 +312,19 @@ echo "(156) Fall Out 14.z (Interlude - Basil Winters): Basil Winters visits Muss
 
 echo "(157) Playing a Part 15.1 (Verona): Verona deals with her dad as their social worker looks on with concern. Things go about as well as can be expected. Verona later rescues Matthew from a fight with Edith, who is still trying to get Matthew to give their marriage another chance. The duo head together to the Undercity to deal with some escaped Others, and commiserate over their difficult home situations."
 
+echo "(158) Playing a Part 15.2 (Avery): Avery’s phone call with Liberty is interrupted when she’s summoned by the Lord of Thunder Bay, who asks her to look into council members Florin, Hugh Legendre, Odis’s apprentice Thea, and Thomas Whitt, who the Lord suspects are plotting with Musser. In her Innocent life, Avery confronts her new friend Jeannine about her lack of respect for boundaries, and spends some more time with her other new friend, Nora. Avery spies on Florin, listens to a drum solo in Nora’s garage, and reflects on how hard it’s becoming to juggle all of the people in her life."
+
+echo "(159) Playing a Part 15.3 (Lucy): Lucy says goodbye to Wallace before his surgery, and runs into some Undercity refugees at school (Bracken and younger brother). Lucy, Verona, and Miss discuss the ramifications for Kennet of allowing Knotted people to live in the Overcity, the logistics of Verona’s planned weekend away to visit Avery, and the looming threat of the Family Man’s Undercity cult. 
+"
+
+echo "(160) Playing a Part 15.4 (Avery): Verona arrives in Thunder Bay (reuniting Cherrypop and Snowdrop), and she and Avery discuss options for preventing Kennet from Knotting further. Verona opens up to Avery a bit, meets the Thunder Bay council, and has an awkward dinner with her mother and Avery’s family. The chapter concludes with Avery discovering Verona in the bathroom, crippled by her chronic pain. Verona confides in Avery that her injury may be permanent"
+
+echo "(161) Playing a Part 15.5 (Verona): We get a very depressing look into Verona’s mental state as she mostly fails to cope with her current life situation and quietly sinks deeper into a bleak spiral. She and Avery work together to summon some new Lost: Ratko the Wrongdoer, Sootsleeves, a living song, and the Tearaway Kid. Their new allies let them know that Thea is planning to kidnap some children"
+
+echo "(162) Playing a Part 15.6 (Lucy): Lucy hangs out with Mia, before being summoned by Rook to help deal with Marlen, who is on her way to meet with Basil, where she will likely uncover Rook’s ploy. Lucy’s mom tries to stop her, but Lucy manages to sneak out with Bracken, Montague, Doe, Toadswallow, and Reggie to intercept Marlen. The Kennet Others try to help, but things go awry, and Marlen flees into the Undercity, where she is brought under the protection of the Family Man, who appears to be in the midst of making a deal with the Bitter Street Witch"
+
+echo "(163) Playing a Part 15.7 (Avery): We get some more details on Sootsleeve’s past life on the Paths, before Avery and Verona disguise themselves in order to enter the magic item Thea has positioned to trap some children. Things seem deceptively fun and okay in Thea’s world, but Avery suspects something is off. Things come to a head when Avery gives one of the children her escape key to present to Thea, who gets extremely angry and traps Avery and Verona in the magic item. She reveals that she was planning to ‘clip the wings’ of the childrens’ souls, and Avery and Verona prepare to face off against both Thea and the Other that inhabits the magic item, the Ornithologist. "
+
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1: Drawings of circles and diagrams that the girls are learning."
@@ -351,4 +364,4 @@ echo "(36) [9.9] Locations & Events: Map of where things have been happening thr
 echo "(37) [9.z] Magic Item Identification: Items analyzed by Nicolette- Dropped Knife, Fogged Watch, City Pin, Miss's quil pen, Black Rope, Weapon Ring, Dog Tags, Ratfink Key, Thorn, Summer Glamour, Dark Fall Glamour, High Summer Rose."
 echo "(38) [11.2] Just in Case: The girls write notes to their friends and family in case theri confrontation of Edith goes south. The notes go to Jasmine, Jeremy, and Avery's family."
 echo "(39) [12.7] Knots & Depressions: Notes on types of Knots and their causes."
-
+echo "(40) [15.2] Keeping Tabs, Kennet: Notes on the state of Kennet. Goes over te undercity (bitter street witch, VP, foreman, and family man), the current council + other Kennet Others, and all of the spirit shrines."
