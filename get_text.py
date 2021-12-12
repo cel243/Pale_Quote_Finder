@@ -59,7 +59,8 @@ INTERLUDE_PERSPECTIVES = {
     'B3'                     : 'Alabaster',
     'B4'                     : 'Cagerattler-Frances-Plath',
     'B5'                     : 'John',
-    'Fall Out 14.z'          : 'Basil Winters'
+    'Fall Out 14.z'          : 'Basil Winters',
+    'Playing a Part 15.z'    : 'Gilkey'
 }
 ###############################################################################
 ###############################################################################

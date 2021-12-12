@@ -265,4 +265,4 @@ if __name__ == "__main__":
         ems = get_em_list()
         for em in ems:
             download_em(em)
-    # download_em(EM("https://palewebserial.wordpress.com/2021/07/15/12-7-spoilers-knots-depressions/","(39) [12.7] Knots & Depressions", "[12.7]"))
+    # download_em(EM("https://palewebserial.wordpress.com/2021/11/05/15-2-spoilers-keeping-tabs-kennet/","(40) [15.2] Keeping Tabs, Kennet", "[15.2]"))
