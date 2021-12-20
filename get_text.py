@@ -38,7 +38,7 @@ INTERLUDE_PERSPECTIVES = {
     'Back Away 5.a'          : 'Clementine',
     'Back Away 5.b'          : 'Daniel',
     'Back Away 5.c'          : 'Clementine',
-    'Back Away 5.d'          : 'Pecker-Matthew-Miss',
+    'Back Away 5.d'          : 'Pecker-Matthew-Tashlit-Miss',
     'Cutting Class 6.z'      : 'Fernanda',
     'Gone Ahead 7.a'         : 'Kevin',
     'Gone Ahead 7.x'         : 'Alexander',
@@ -102,6 +102,8 @@ def get_header(entry_contents, chap_title):
                 # Multiple perspectives found.
                 return "All", remainder
         elif item.name == "p":
+            if item.get_text().strip().lower() == "nora":
+                return "Avery-Nora",remainder
             if item.get_text().strip().lower() in {"avery", "verona", "lucy", 
                 "interlude", "interude", "prologue", "avery (again)", 
                 "verona (again)", "lucy (again)"}:

@@ -337,6 +337,10 @@ echo "(168) Playing a Part 15.z (Interlude - Gilkey): Gilkey is sent to fetch Av
 
 echo "(169) Left in the Dust 16.1 (Verona): We flash back to before the Family Man's takedown. Verona and Lucy talk the Kennet council into allowing outside Practitioners back into Kennet, before inviting the Foreman, the Bitter Street Witch, and the Vice Principal to the table. The Witch and Vice Principal agree to cooperate and stop expanding their territories in exchange for certain boons, but the Foreman only agrees to help take down the Family Man, for a price. Later, Liberty and Nicolette arrive in the Undercity. Nicolette meets with a Bitter Street Witch, and they seem to hit it off. Liberty and Toadswallow have a slight disagreement over her father's nature. The chapter closes with Toadswallow's debut of his new goblin market, and a warning from both Nicolette and the Witch that the girls will have to deal with Lis if they want to make any headway in growing and shaping Kennet."
 
+echo "(170) Left in the Dust 16.2 (Avery): Avery spies on Tomas Whitt and discovers he plans to bring weapons into Thunder Bay via Anthem Tedd, in order to strike a truce with Witch Hunters. Liberty and Nicolette come to town, and Liberty meets Avery's family before the two head out to town, where they run into Nora."
+
+echo "Left in the Dust 16.3 (Avery-Nora): Liberty, Nora, and Avery have a heart-to-heart around a campfire; we learn more about Nora's past, and Avery and Liberty butt heads over Anthem Tedd. Later, Liberty and Avery run the Build Up Path with Jude and some other Garricks, and Avery negotiates for Edeline the City Bird Rider to be set free to fly off into the sunset with the Tearaway Kid. Finally, Nora visits Avery and confesses her feelings for her, and the two girls decide to enter a relationship, although Nora isn't ready to be out yet. We learn that Liberty is bisexual and interested in Avery, but that she allowed Nora to take her shot first."
+
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1: Drawings of circles and diagrams that the girls are learning."
@@ -377,3 +381,4 @@ echo "(37) [9.z] Magic Item Identification: Items analyzed by Nicolette- Dropped
 echo "(38) [11.2] Just in Case: The girls write notes to their friends and family in case theri confrontation of Edith goes south. The notes go to Jasmine, Jeremy, and Avery's family."
 echo "(39) [12.7] Knots & Depressions: Notes on types of Knots and their causes."
 echo "(40) [15.2] Keeping Tabs, Kennet: Notes on the state of Kennet. Goes over te undercity (bitter street witch, VP, foreman, and family man), the current council + other Kennet Others, and all of the spirit shrines."
+echo "(41) [15.6] Keeping Tabs, Thunder Bay: Rates each council member in various dimensions, discusses the territories Musser has been taking."
