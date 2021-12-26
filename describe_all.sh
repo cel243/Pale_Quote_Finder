@@ -341,6 +341,8 @@ echo "(170) Left in the Dust 16.2 (Avery): Avery spies on Tomas Whitt and discov
 
 echo "Left in the Dust 16.3 (Avery-Nora): Liberty, Nora, and Avery have a heart-to-heart around a campfire; we learn more about Nora's past, and Avery and Liberty butt heads over Anthem Tedd. Later, Liberty and Avery run the Build Up Path with Jude and some other Garricks, and Avery negotiates for Edeline the City Bird Rider to be set free to fly off into the sunset with the Tearaway Kid. Finally, Nora visits Avery and confesses her feelings for her, and the two girls decide to enter a relationship, although Nora isn't ready to be out yet. We learn that Liberty is bisexual and interested in Avery, but that she allowed Nora to take her shot first."
 
+echo "(172) Left in the Dust 16.4 (Lucy): Lucy and Verona visit Marlen in captivity and thwart her many escape attempts. The two girls then head off to collect some allies before confronting Lis. They meet Guilherme and Miss in the Fae cave, where Miss admits that she's been considering leaving Kennet. Guilherme, Grandfather, Tashlit, and Matthew tag along afterwards. Before the group can speak to Lis, Charles appears and Gainsays both Verona and Lucy (despite Verona's best efforts). Verona later reveals her plan to create a Lost version of Kennet, with Miss and Founder."
+
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1: Drawings of circles and diagrams that the girls are learning."

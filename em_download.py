@@ -114,7 +114,7 @@ def get_em_list():
   em_page_link = "https://palewebserial.wordpress.com/extra-material/"
   em_page = requests.get(em_page_link).text
   soup = bs4.BeautifulSoup(em_page, features="html.parser")
-  entry = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[1].contents[4]
+  entry = soup.html.contents[5].contents[10].contents[4].contents[1].contents[1].contents[1].contents[4]
   ems = []
   em_num = 1
   for i in range(len(entry.contents)):
@@ -228,9 +228,9 @@ def download_em(em):
     em_page_text = requests.get(em.url).text
     soup = bs4.BeautifulSoup(em_page_text, features="html.parser")
 
-    em.text = get_em_text(soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[4].contents[4].contents)
+    em.text = get_em_text(soup.html.contents[5].contents[10].contents[4].contents[1].contents[1].contents[4].contents[4].contents)
 
-    comments = soup.html.contents[5].contents[2].contents[4].contents[1].contents[1].contents[7].contents[3].contents
+    comments = soup.html.contents[5].contents[10].contents[4].contents[1].contents[1].contents[7].contents[3].contents
     if em.tag in EXCEPTION_MAPPING:
         if EXCEPTION_MAPPING[em.tag] is None:
             em.transcript = ""
@@ -258,11 +258,11 @@ def write_file(em):
     print(f"Wrote {em.name}")
 
 if __name__ == "__main__":
-    if DOWNLOAD_ONE_EM is not None:
-        em = get_this_em(DOWNLOAD_ONE_EM)
-        download_em(em)
-    else:
-        ems = get_em_list()
-        for em in ems:
-            download_em(em)
-    # download_em(EM("https://palewebserial.wordpress.com/2021/11/05/15-2-spoilers-keeping-tabs-kennet/","(40) [15.2] Keeping Tabs, Kennet", "[15.2]"))
+    # if DOWNLOAD_ONE_EM is not None:
+    #     em = get_this_em(DOWNLOAD_ONE_EM)
+    #     download_em(em)
+    # else:
+    #     ems = get_em_list()
+    #     for em in ems:
+    #         download_em(em)
+    download_em(EM("https://palewebserial.wordpress.com/2021/12/25/spoilers-16-3-100y/","(42) [16.4] 100 Years Lost, Excerpts", "[16.4]"))
