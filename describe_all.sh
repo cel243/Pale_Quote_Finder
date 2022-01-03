@@ -343,6 +343,10 @@ echo "Left in the Dust 16.3 (Avery-Nora): Liberty, Nora, and Avery have a heart-
 
 echo "(172) Left in the Dust 16.4 (Lucy): Lucy and Verona visit Marlen in captivity and thwart her many escape attempts. The two girls then head off to collect some allies before confronting Lis. They meet Guilherme and Miss in the Fae cave, where Miss admits that she's been considering leaving Kennet. Guilherme, Grandfather, Tashlit, and Matthew tag along afterwards. Before the group can speak to Lis, Charles appears and Gainsays both Verona and Lucy (despite Verona's best efforts). Verona later reveals her plan to create a Lost version of Kennet, with Miss and Founder."
 
+echo "(173) Left in the Dust 16.5 (Verona): The trio and friends begin negotiations with the conspirators. It goes just okay. Later, Tashlit tells Verona she doesn't want to be her Familiar just yet. Verona isn't ready to hear her explanation, and takes solace in Jeremy for the evening. The Kennet council, Undercity leaders, and some Aware meet in dream to discuss their plan for Miss to Found a Lost Kennet."
+
+echo "(174) Left in the Dust 16.6 (Lucy): We see a series of upsetting scenes from Lucy's past, before joining Lucy and Bracken as they receive their first joint combat lesson from Guilherme, while Melissa looks on. Lucy heads to visit Verona, who's working on Alchemy and preparing for her Demesne ritual, then stops by the Undercity to meet some of the friends Toadswallow brought in to help set up his market. Rook gives Lucy some sage advice on her way out, and finally, Lucy visits Wallace, who is back in town, and forgives him for not contacting her while he was away."
+
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1: Drawings of circles and diagrams that the girls are learning."
@@ -384,3 +388,4 @@ echo "(38) [11.2] Just in Case: The girls write notes to their friends and famil
 echo "(39) [12.7] Knots & Depressions: Notes on types of Knots and their causes."
 echo "(40) [15.2] Keeping Tabs, Kennet: Notes on the state of Kennet. Goes over te undercity (bitter street witch, VP, foreman, and family man), the current council + other Kennet Others, and all of the spirit shrines."
 echo "(41) [15.6] Keeping Tabs, Thunder Bay: Rates each council member in various dimensions, discusses the territories Musser has been taking."
+echo "(42) [16.4] 100 Years Lost, Excerpts: Hazel's backstory"
