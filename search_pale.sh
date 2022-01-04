@@ -18,7 +18,15 @@ if [[ $# -gt 3 ]]; then
         echo " "
       fi
     else
-      egrep --color=always -r$2  "$1" "$file" | grep "txt.." | grep --color=always ".*txt" | awk '{ print $0, "\n"}'
+      if [[ "$2" == *C* ]]; then
+        if grep -q -E -r$2  "$1" "$file"; then 
+          grep --color=always ".*txt" <<< "$file"
+          echo " "
+        fi
+        egrep --color=always -rh$2  "$1" "$file" | grep [a-zA-z\-]| awk '{ print $0, "\n"}'
+      else
+        egrep --color=always -r$2  "$1" "$file" | grep "txt.." | grep --color=always ".*txt" | awk '{ print $0, "\n"}'
+      fi
     fi
   done < <( eval "egrep -rl$5 \"$4\" ./$3" | sort )
 else
