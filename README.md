@@ -6,7 +6,7 @@ Ensure you have Python installed. Run `pip install -r requirements.txt` to ensur
 
 ## File Downloads
 
-Since the purpose of the file download is quote-finding, all downloaded files are text only, with no formatting beyond paragraph breaks. 
+**All downloaded files are PLAIN TEXT ONLY, with no images, and no formatting beyond paragraph breaks**. This is because the purpose of the file download is quote-finding *only*, and is not in any way intended for a reading experience. To read Pale, please visit the website linked above, and do NOT run this download script for any reason other than its intended purpose.
 
 ```$ python get_text.py``` 
 
@@ -22,7 +22,7 @@ Extra Materials are downloaded as `Pale_Chapters/EM/(<EM NUMBER>) [<CHAPTER>] <T
 
 **Run both of the above commands with no arguments to download all of Pale. See below to explore other download options.**
 
-### Adding New Chapters and Extra Materials
+### Adding NEW Chapters and Extra Materials
 
 When a new chapter is released, there's no need to download all of Pale again. Simply run the following command to get the most recent chapter:
 
@@ -42,13 +42,13 @@ python em_download.py 'X.X'
 
 Replace `'X.X'` with the chapter number that the extra material was for (e.g., the argument `'7.3'` downloads the 'Borrowed Eyes Comic' extra material). 
 
-**NOTE:** Unlike the chapter download script, this script fetches extra materials from the extra material table of contents page. Sometimes it takes a few days for this page to be updated with new releases, in which case the script will not be able to find the content. If you want the EM before that time, follow the instructions in the documentation inside the `em_download.py` file.
+**NOTE:** Unlike the chapter download script, this script fetches extra materials from the extra material table of contents page. Sometimes it takes a few days for this page to be updated with new releases, in which case the script will not be able to find the content. If you want the EM before that time, follow the instructions in the documentation inside the `em_download.py` file itself.
 
 ## Pale Quote Search Engine
 
 `search_pale` is a script that makes searching for quotes in Pale using regular expressions super easy!
 
-**USE:** `./search_pale.sh <PATTERN> <FLAGS> <DIRECTORY> <GLOBAL PATTERN> <GLOBAL PATTERN FLAGS>`
+**USAGE:** `./search_pale.sh <PATTERN> <FLAGS> <DIRECTORY> <GLOBAL PATTERN> <GLOBAL PATTERN FLAGS>`
 - `PATTERN` is the regular expression that you want the returned lines to match (**required**)
 - `FLAGS` are the flags you want `egrep` to use (**optional**)
 - `DIRECTORY` is the directory you want to search in. Since chapters are grouped into folders by arc/extra material status, you can use this input to search only within a particular arc. Or, you can use this input to search only Avery chapters, or only interludes, etc. (**optional**)
@@ -97,6 +97,8 @@ The flags I use the most often are:
 - `i`: makes your search case-insensitive
 - `l` displays only the chapters matched, and not the lines themselves. This is a good way to get a sense for how many results your search will return, or which arcs to start looking in
 
+TIP: To use both the `i` and `l` flags, you can do `./search_pale.sh "<pattern>" "il"`
+
 **Filter by Arc:**
 
 All of the pale chapters are placed in a directory per arc. For example, all of the Arc 1 chapters are in a directory `01/`. To search only for results in Arc 1, simply pass `"01"` as the third flag to `./search_pale`. 
@@ -111,17 +113,20 @@ Every chapter file is annotated with the perspective (e.g. 'Verona', 'Interlude'
 
 Similarly, you can use the "directory" argument to search only witin a chapter or chapters, for example: `./search_pale "<pattern>" "" "01/*1.[56]*"` will search only chapters 1.5 and 1.6. You can also use brace expansion, like `./search_pale "<pattern>" "" "[01][0-9]/*{1.3,9.10}]*"`
 
-**(IMPORTANT) A Note on Searches Involving Double-Quotes:**
+**Retrieving More Context:**
 
-While you can use `'` to your heart's content, the character `"` can be a little weird and cause `EOF` errors. If you want to search for a line including the `"` character:
-- Escape the symbol with a `\`
-- Pass in a space character as the `GLOBAL PATTERN` argument
+Sometimes you want not just the matched line, but maybe a few lines around it for context. You can do this using the flag `-C <num lines>`. 
 
-**EX:** Instead of `./search_pale.sh '" Charles'`, do `./search_pale.sh '\" Charles' '' '' ' '` (note that in order to use the `GLOBAL PATTERN` argument, you have to pass in the `FLAGS` and `DIRECTORY` arguments, too)
+The `C` flag is added to the same script argument as other flags (the second argument), but it's treated differently. With other flags, you simply add the letter, with this flag:
+- It must be specified LAST
+- **You must add a space**, `-C`, another space, and then the number of lines you want surrounding the matched line
+- **You must pass in a space character as the `GLOBAL PATTERN` argument**, if you don't care about matching a global file pattern, or you can use the global file pattern if you do want to match a global file pattern. The important thing here is just that the global pattern arg is used somehow (note that in order to use the `GLOBAL PATTERN` argument, you have to pass in the `FLAGS` and `DIRECTORY` arguments, too, but they can be empty)
 
-This will give you the expected results, since restricting your search to files containing a space is the same as searching all files. Introducing the space as global pattern simply forces the script to invoke the global pattern handler, which is implemented in a way that nullifies the problems introduced by the `"`. 
+For example, if you were looking for the word `meow`, with 3 lines of context, *and* you wanted the matches to be case-insensitive, you would type: `./search_pale.sh "\bmeow\b" "i -C 3" "" " "`.
 
-If there are known errors with normal searching that are fixed by the global search method, why isn't the global search method default? Unfortunately, that method is noticeably slower, and I thought it wasn't worth slowing down all searches to handle one use case. 
+If you did not care about whether the match ignored case, you would type: `./search_pale.sh "\bmeow\b" " -C 3" "" " "` (note that there is still a space before the `-C`). 
+
+This will give you the expected results, since restricting your search to files containing a space is the same as searching all files. Introducing the space as global pattern simply forces the script to invoke the global pattern handler, which is implemented in a way that allows the context matching to print in a nicer way. The reason this implementation isn't the default is because it's slower.
 
 ### Input/Output Examples
 
@@ -165,6 +170,46 @@ If there are known errors with normal searching that are fixed by the global sea
 `open_pale` is just a script that makes opening chapters faster than finding and clicking on the files by hand.
 - `./open_pale.sh 1 4` opens 1.4
 - `./open_pale.sh em 1 4` would open the **extra material** for 1.4
+
+### Chapter Synopsis Search
+
+`./synopsis.sh <pattern>` prints the synopsis of every Pale chapter/extra material where the synopsis line (of the form `(<absolute chapter number>) <arc title> <relative chapter number e.g. 15.6> (<perspective>): <synopsis>`) matches `<pattern>` (a regular expression). **Note that matches are case-insensitive and this cannot be turned off without modifying the script.**
+
+The idea behind this script is to easily:
+
+- View the summaries of all the chapters in a particular arc, to narrow down when a particular event occured
+- Find which chapter a particular event occured in if you can think of the right key words for what happened
+- Find the chapter number for a particular character's POV (e.g., looking for a specific interlude)
+
+**EXAMPLES:**
+
+```
+./synopsis.sh 15.4
+```
+
+Prints the synopsis for chapter 15.4.
+
+```
+./synopsis.sh " \[?2\."
+```
+
+Prints the summaries for all arc 2 chapters and extra materials. The `\[?` matches lines that may or may not have a `[` before the `2`, because extra materials are formatted like: `[2.7]`. The space before the `\[?2\.` ensures that we don't match things like arc 12.
+
+```
+./synopsis.sh "Toadswallow\)"
+```
+
+Prints the synopsis for Toadswallow's interlude. The reason for the `\)` at the end of the patterns is to match the formatting of chapter perspectives, which are surrounded by parentheses. For TS's interlude, we are trying to match `(100) One After Another 10.e (Interlude - Toadswallow)`. If we left out the `\)`, we would instead match every chapter where the synopsis contains Toadswallow's name. 
+
+```
+./synopsis.sh " (12|13)\..*\(Verona.*Raquel"
+```
+
+Above is a more complicated example. In this case, I'm trying to determine the chapter in which Verona and Raquel had a heart to heart on a rooftop while fighting the witch hunters. Maybe I don't remember any specific lines from this conversation, just that it was sometime in arcs 12 or 13 and definitely happened during a Verona chapter. First, to match arcs 12 or 13, I add `(12|13)\.` to my pattern, trying to match the arc number followed by a period in the synopsis. Next, after some number of characters, I match `\(Verona`, trying to match the chapter perspective. Finaly, after another sequence of 0 or more characters, I match the name Raquel, hoping it is somewhere in the chapter synopsis.
+
+Sure enough, this brings up: 
+
+<img src="https://user-images.githubusercontent.com/54676970/148141136-e6ca3a10-1415-477b-8856-bbad4ed54fac.png" alt="ex_3" width="700"/>
 
 ### Chapter Perspective Count
 
