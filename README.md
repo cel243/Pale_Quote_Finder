@@ -117,10 +117,10 @@ Similarly, you can use the "directory" argument to search only witin a chapter o
 
 Sometimes you want not just the matched line, but maybe a few lines around it for context. You can do this using the flag `-C <num lines>`. 
 
-The `C` flag is added to the same script argument as other flags (the second argument), but it's treated differently. With other flags, you simply add the letter, with this flag:
+The `C` flag is added to the same script argument as other flags (the second argument), but it's treated differently. With other flags, you simply add the letter. However with this flag:
 - It must be specified LAST
-- **You must add a space**, `-C`, another space, and then the number of lines you want surrounding the matched line
-- **You must pass in a space character as the `GLOBAL PATTERN` argument**, if you don't care about matching a global file pattern, or you can use the global file pattern if you do want to match a global file pattern. The important thing here is just that the global pattern arg is used somehow (note that in order to use the `GLOBAL PATTERN` argument, you have to pass in the `FLAGS` and `DIRECTORY` arguments, too, but they can be empty)
+- **You must add a space first**, then `-C`, then another space, and then the number of lines you want surrounding the matched line
+- **You must pass in a space character as the `GLOBAL PATTERN` argument** (if you don't care about matching a global file pattern), OR if you *do* want to match a global file pattern, use this argument as you normally would. The important thing here is just that the global pattern arg is used somehow (note that in order to use the `GLOBAL PATTERN` argument, you have to pass in the `FLAGS` and `DIRECTORY` arguments, too, but they can be empty)
 
 For example, if you were looking for the word `meow`, with 3 lines of context, *and* you wanted the matches to be case-insensitive, you would type: `./search_pale.sh "\bmeow\b" "i -C 3" "" " "`.
 
