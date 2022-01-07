@@ -24,7 +24,7 @@ Interludes are only marked with the actual character perspective if the
 Interlude has been added to INTERLUDE_PERSPECTIVES below.
 """
 if len(sys.argv)<2:
-    START_LINK = "https://palewebserial.wordpress.com/2021/12/18/left-in-the-dust-16-3/"
+    START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
 else:
     START_LINK = sys.argv[1]
 
