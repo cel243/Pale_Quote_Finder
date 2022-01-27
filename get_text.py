@@ -60,7 +60,9 @@ INTERLUDE_PERSPECTIVES = {
     'B4'                     : 'Cagerattler-Frances-Plath',
     'B5'                     : 'John',
     'Fall Out 14.z'          : 'Basil Winters',
-    'Playing a Part 15.z'    : 'Gilkey'
+    'Playing a Part 15.z'    : 'Gilkey',
+    'Left in the Dust 16.y'  : 'Milly',
+    'Left in the Dust 16.z'  : 'Queen-Cassandra-Kitty-Bridge'
 }
 ###############################################################################
 ###############################################################################

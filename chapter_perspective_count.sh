@@ -19,8 +19,14 @@ while IFS= read -r line; do
     fi
     if [[ "$chapter" == *"Avery"* ]]; then
       # echo "$chapter"
-      chapter_total=$( cat Pale_Chapters/"$line"/"$chapter" | wc -w )
-      avery_total=$(( $avery_total + $chapter_total ));
+      if [[ "$chapter" == *"Avery"*"Nora"* ]]; then
+        # echo "$chapter"
+        avery_total=$(( $avery_total + 14020 ));
+        int_total=$(( $int_total + 432 ));
+      else
+        chapter_total=$( cat Pale_Chapters/"$line"/"$chapter" | wc -w )
+        avery_total=$(( $avery_total + $chapter_total ));
+      fi
     fi
     if [[ "$chapter" == *"8.8"*"All"* ]]; then
       # echo "$chapter"
@@ -102,8 +108,15 @@ while IFS= read -r line; do
         v_word=$(( $v_word + $chapter_total ))
       fi
       if [[ "$chapter" == *"Avery"* ]]; then
-        avery=$(( $avery + 1 ));
-        a_word=$(( $a_word + $chapter_total ))
+            if [[ "$chapter" == *"Avery"*"Nora"* ]]; then
+            # echo "$chapter"
+              avery=$(( $avery + 1 ));
+              avery_total=$(( $a_word + 14020 ));
+              int_total=$(( $i_word + 432 ));
+            else
+            avery=$(( $avery + 1 ));
+            a_word=$(( $a_word + $chapter_total ))
+            fi
       fi
       if [[ "$chapter" == *"8.8"*"All"* ]]; then
         avery=$(( $avery + 1 ));
