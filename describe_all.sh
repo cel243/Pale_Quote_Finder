@@ -369,6 +369,12 @@ echo "(184) Gone and Done It 17.4 (Lucy): Lucy goes on a date with Wallace, befo
 
 echo "(185) Gone and Done It 17.5 (Avery): Florin visits Avery after school. He explains that he's been exiled from Thunder Bay, but leaves Avery with a business card and a promise of one future favor. Afterwards, Avery hangs out with Nora, and the two have an important conversation about their relationship, during which Nora agrees that she won't ask too many questions about the secrets Avery is keeping, for now. Avery goes home to have a brief discussion with her mom about handling her family when they all visit Kennet for Thanksgiving, and afterwards Avery meets with Miss; the two discuss which path Miss should use as a jumping-off place to create Kennet Found, finally settling on the Stuck-In Place."
 
+echo "(186) Gone and Done It 17.6 (Avery): Avery returns home to a crowded, noisy house, before joining Verona and Lucy in Verona's Demesne to discuss the Founding ritual. They call the Garricks, who are equal parts horrified and impressed by the girls' plan, and offer their expertise to help the ritual go smoothly. The girls visit Louise to tell her about the one major piece missing from the ritual: they need three pillars to stabilize Kennet, and they only have two (the council seat and Verona's Demesne). Matthew, though, has a solution, and begins the ritual to claim his house as a Demesne."
+
+echo "(187) Gone and Done It 17.7 (Verona): Verona adjusts to life in her Demesne, discovers that her Fetch may be developing a sense of self, and bonds with Avery's cousins (Breanne and Kyle; later joined by Mallory) while Avery frets over Verona's mental state. Later, Verona visits Matthew's ritual to give her 'no contest' to his claim (as Edith hovers outside and dreams of their future together). The chapter closes as Lucy and Verona start to prepare the Found Kennet ritual, taking note of Musser's forces beginning to gather in Kennet."
+
+
+
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1: Drawings of circles and diagrams that the girls are learning."
