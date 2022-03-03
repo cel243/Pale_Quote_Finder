@@ -10,7 +10,7 @@ export GREP_COLOR='1;36;40'
 
 ./describe_all.sh \
   | egrep --color=none -i "$1" \
-  | egrep --color=always "^[^:]*:"\
+  | egrep --color=always "^[^:]*):"\
   | awk '{ print $0, "\n"}'
 
 echo " "

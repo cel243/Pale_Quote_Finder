@@ -24,7 +24,7 @@ Interludes are only marked with the actual character perspective if the
 Interlude has been added to INTERLUDE_PERSPECTIVES below.
 """
 if len(sys.argv)<2:
-    START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
+    START_LINK = "https://palewebserial.wordpress.com/2022/02/22/gone-and-done-it-17-b/" # "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
 else:
     START_LINK = sys.argv[1]
 
@@ -62,7 +62,9 @@ INTERLUDE_PERSPECTIVES = {
     'Fall Out 14.z'          : 'Basil Winters',
     'Playing a Part 15.z'    : 'Gilkey',
     'Left in the Dust 16.y'  : 'Milly',
-    'Left in the Dust 16.z'  : 'Queen-Cassandra-Kitty-Bridge'
+    'Left in the Dust 16.z'  : 'Queen-Cassandra-Kitty-Bridge',
+    "Gone and Done It 17.a"  : 'Elizabeth Driscoll',
+    "Gone and Done It 17.b"  : 'Eloise'
 }
 ###############################################################################
 ###############################################################################
@@ -185,7 +187,7 @@ def download_this_chapter(chapter, page_text):
     if len(chapter.arc) < 2:
         chapter.arc = "0"+chapter.arc
     
-    entry_contents = soup.html.contents[5].contents[10].contents[4].contents[1].contents[1].contents[4].contents[4].contents
+    entry_contents = soup.html.contents[5].contents[18].contents[4].contents[1].contents[1].contents[4].contents[4].contents
 
     # Populate chapter perspective, nex link, and chapter text.
     # 'Break' chapters get a special perspective rule.
@@ -237,7 +239,7 @@ def get_chap_num_from_context(page_text):
     previous chapter. If not found, the default assumption is that this is
     chapter one. """
     soup = bs4.BeautifulSoup(page_text, features="html.parser")
-    entry = soup.html.contents[5].contents[10].contents[4].contents[1].contents[1].contents[4].contents[4]
+    entry = soup.html.contents[5].contents[18].contents[4].contents[1].contents[1].contents[4].contents[4]
     entry_contents = entry.contents
     
     # First, get the link to the previous chapter.
