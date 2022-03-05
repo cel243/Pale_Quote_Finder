@@ -207,10 +207,6 @@ Prints the synopsis for Toadswallow's interlude. The reason for the `\)` at the 
 
 Above is a more complicated example. In this case, I'm trying to determine the chapter in which Verona and Raquel had a heart to heart on a rooftop while fighting the witch hunters. Maybe I don't remember any specific lines from this conversation, just that it was sometime in arcs 12 or 13 and definitely happened during a Verona chapter. First, to match arcs 12 or 13, I add `(12|13)\.` to my pattern, trying to match the arc number followed by a period in the synopsis. Next, after some number of characters, I match `\(Verona`, trying to match the chapter perspective. Finaly, after another sequence of 0 or more characters, I match the name Raquel, hoping it is somewhere in the chapter synopsis.
 
-Sure enough, this brings up: 
-
-<img src="https://user-images.githubusercontent.com/54676970/148141136-e6ca3a10-1415-477b-8856-bbad4ed54fac.png" alt="ex_3" width="700"/>
-
 ### Chapter Perspective Count
 
 `./chapter_perspective_count.sh` gives as overviews of the number of chapters per arc from each character's perspective, and the number of words per arc from each perspective, as well as story-level stats. 
