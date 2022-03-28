@@ -64,7 +64,8 @@ INTERLUDE_PERSPECTIVES = {
     'Left in the Dust 16.y'  : 'Milly',
     'Left in the Dust 16.z'  : 'Queen-Cassandra-Kitty-Bridge',
     "Gone and Done It 17.a"  : 'Elizabeth Driscoll',
-    "Gone and Done It 17.b"  : 'Eloise'
+    "Gone and Done It 17.b"  : 'Eloise',
+    "Gone and Done It 17.x"  : 'Easton Songetay'
 }
 ###############################################################################
 ###############################################################################
