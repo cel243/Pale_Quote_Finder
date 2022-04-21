@@ -65,7 +65,10 @@ INTERLUDE_PERSPECTIVES = {
     'Left in the Dust 16.z'  : 'Queen-Cassandra-Kitty-Bridge',
     "Gone and Done It 17.a"  : 'Elizabeth Driscoll',
     "Gone and Done It 17.b"  : 'Eloise',
-    "Gone and Done It 17.x"  : 'Easton Songetay'
+    "Gone and Done It 17.x"  : 'Easton Songetay',
+    "Gone and Done It 17.y"  : 'Wye Belanger',
+    "Gone and Done It 17.z"  : 'Musser',
+    "Wild Abandon 18.a"      : 'Luna Hare-BSW-Dom'
 }
 ###############################################################################
 ###############################################################################
@@ -110,7 +113,7 @@ def get_header(entry_contents, chap_title):
             if item.get_text().strip().lower() == "nora":
                 return "Avery-Nora",remainder
             if item.get_text().strip().lower() in {"avery", "verona", "lucy", 
-                "interlude", "interude", "prologue", "avery (again)", 
+                "interlude", "interludes", "interude", "prologue", "avery (again)", 
                 "verona (again)", "lucy (again)"}:
                 if perspective is None:
                     perspective = item.get_text().strip()
@@ -119,7 +122,7 @@ def get_header(entry_contents, chap_title):
                     if perspective == "Interude":
                         # Fix Cherry's spelling.
                         perspective = "Interlude - Cherrypop"
-                    elif perspective == "Interlude":
+                    elif perspective == "Interlude" or perspective == "Interludes":
                         if chap_title in INTERLUDE_PERSPECTIVES:
                             perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
                         else:
