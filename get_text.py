@@ -69,7 +69,11 @@ INTERLUDE_PERSPECTIVES = {
     "Gone and Done It 17.y"  : 'Wye Belanger',
     "Gone and Done It 17.z"  : 'Musser',
     "Wild Abandon 18.a"      : 'Luna Hare-BSW-Dom',
-    "Wild Abandon 18.b"      : 'Biscuit'
+    "Wild Abandon 18.b"      : 'Biscuit',
+    "Wild Abandon 18.c"      : 'Anthem Tedd',
+    'Wild Abandon 18.y'      : 'Lis',
+    "Wild Abandon 18.z"      : 'Brie-Ann-Seth'
+
 }
 ###############################################################################
 ###############################################################################

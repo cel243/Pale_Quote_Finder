@@ -47,6 +47,12 @@ while IFS= read -r line; do
       verona_total=$(( $verona_total + 3790  ));
       lucy_total=$(( $lucy_total + 3331 ));
     fi
+    if [[ "$chapter" == *"18.10"*"All"* ]]; then
+      # echo "$chapter"
+      avery_total=$(( $avery_total + 3977 ));
+      verona_total=$(( $verona_total + 7159  ));
+      lucy_total=$(( $lucy_total + 664 ));
+    fi
     if [[ "$chapter" == *"SB"* ]]; then
       # echo "$chapter"
       avery_total=$(( $avery_total + 3362 ));
@@ -149,6 +155,14 @@ while IFS= read -r line; do
         a_word=$(( $a_word + 3335 ))
         v_word=$(( $v_word + 3790 ))
         l_word=$(( $l_word +  3331 ))
+      fi
+      if [[ "$chapter" == *"18.10"*"All"* ]]; then
+        avery=$(( $avery + 1 ));
+        verona=$(( $verona + 1 ));
+        lucy=$(( $lucy + 1 ));
+        a_word=$(( $a_word + 3977 ))
+        v_word=$(( $v_word + 7159 ))
+        l_word=$(( $l_word +  664 ))
       fi
       if [[ "$chapter" == *"SB"* ]]; then
         # echo "$chapter"
