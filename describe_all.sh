@@ -432,6 +432,16 @@ echo "(214) Wild Abandon 18.y (Interlude - Lis): We see flashes of Lis's life: s
 
 echo "(215) Wild Abandon 18.z (Interlude - Brie-Ann-Seth): Brie, Zed, and the girl('s items) work together to gather intel on Charles's new living ritual: The Placement Test; Ann throws a Halloween party; and Seth's Forswearing is undone by the Carmine Exile"
 
+echo "(216) Crossed with Silver 19.1 (Verona): Verona is working on setting up her book shop with the help of foundlings Luna and Shoe. She meets up with McCauleigh, who's staying in Kennet Found, and the two of them discuss whether McCauleigh should go through with the ritual that inducts her into the Hennigar family Practice. With the start of the ski season come tourists, and Lucy and Verona deal with some Others that arrived with the crowd. The trio try to touch base in Nightmare, but they're interrupted when they realize that Charles has figured out how to spy on their dream meetings."
+
+echo "(217) Crossed with Silver 19.2 (Lucy): Lucy, Verona, and Bracken train with Guilherme in Winter glamour, while Lucy also receives training from Toadswallow and Bubbleyum. Lucy, Grandfather, and Reggie (now Yen) chase down an invading Other, and injure it with the help of the Turtle Queen. They discover that it's been created by a Practitioner, who is somewhere in town."
+
+echo "(218) Crossed with Silver 19.3 (Avery): Avery runs a Path before reaching out to some potential allies. She and Connor meet with a First Nations council, and then drive to visit Kassidy Knox's family, enlisting Killwagon along the way to help them avoid the Dropped Call Lord when they pass through its territory. The Tearaway Kid helps Avery make an impression on Mr. Knox by transforming himself and Connor into dragons. Finally, Avery pays a visit to Clementine and Witch Hunter leader Samaniego."
+
+echo "(219) Crossed with Silver 19.4 (Lucy): Lucy teams up with the Turtle Queen, Montague, and Horseman to fight the Technomancy Other, and discover, with some help from Wallace, that it's based on a video game character. Lucy, Verona, and the crew end up chasing it into the Digital Aether, where they defeat the Other. Lucy visits Wallace, and is upset when she overhears his mother telling him he should date someone else. She and Wallace talk it out, and Lucy shows Wallace code she copied from the Technomancy Other's remains. He recognizes the work as something the students at St. Victor's learned."
+
+echo "(220) Crossed with Silver 19.5 (Avery): We cut between the two halves of Avery's life. On the human side, Avery learns that Jeanine is spreading rumors about her and trying to turn the team against her. Avery attends Jeanine's party and confronts her. On the Practitioner side, Avery meets with Samaniego and Clementine. Samaniego tries to convince Clem to work with him, and is hostile to Avery. He reveals that Musser is planning to send the Wild Hunt to Kennet."
+
 echo "(01) [0.0] The Brochure: A look into Kennet's attractions, and the beginnings of a trio of girls preparing for a ritual."
 echo "(02) [1.2] Notes on Others: The girls' notes on the Kennet Others present at the Awakening Ritual."
 echo "(03) [1.4] Notes on Practices 1: Drawings of circles and diagrams that the girls are learning."
