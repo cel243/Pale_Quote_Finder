@@ -72,7 +72,9 @@ INTERLUDE_PERSPECTIVES = {
     "Wild Abandon 18.b"      : 'Biscuit',
     "Wild Abandon 18.c"      : 'Anthem Tedd',
     'Wild Abandon 18.y'      : 'Lis',
-    "Wild Abandon 18.z"      : 'Brie-Ann-Seth'
+    "Wild Abandon 18.z"      : 'Brie-Ann-Seth',
+    "Crossed with Silver 19.z"      : 'The Aurum Coil',
+    "Let Slip 20.a"          : 'Nomi'
 
 }
 ###############################################################################
