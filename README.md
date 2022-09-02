@@ -30,9 +30,15 @@ When a new chapter is released, there's no need to download all of Pale again. S
 python get_text.py <link-to-chapter>
 ```
 
+Or
+
+```
+python get_text.py <link-to-interlude-chapter> <chapter perspective>
+```
+
 **NOTE:** The absolute chapter numbering relies on the "Previous Chapter" link working. If you download a chapter and notice that it's been numbered as chapter "001" instead of 1 + the number of the previous chapter, this is probably because the link is broken. You can rename the file to number the chapter correctly, or wait until the link is fixed and run the script again for this chapter.
 
-**IMPORTANT:** If the new chapter is an interlude, the download will fail unless you add the perspective of that interlude to the `INTERLUDE_PERSPECTIVES` mapping first, in `get_text.py` (this variable is clearly marked near the top of the file, just add an entry mapping the chapter title to the perspective the chapter is from).
+**NOTE:** The chapter perspective you provide for interlude chapters will be stored for later, and the stored value will always take precedence over the value you provide as an argument to the script. If you accidentally stored the wrong perspective name, follow the instructions in `overwrite_interlude_perspective.py`.
 
 When a new extra material is released, run the following command to download it:
 
