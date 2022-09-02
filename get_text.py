@@ -3,6 +3,7 @@ import bs4
 import re
 import os
 import sys
+import pickle
 
 """
 Downloads ALL chapters of Pale (none of the extra materials) and stores the 
@@ -23,67 +24,36 @@ you can pass in a start link as an argument to the process.
 Interludes are only marked with the actual character perspective if the 
 Interlude has been added to INTERLUDE_PERSPECTIVES below.
 """
+
+# Instantiate script argument values #######################################
+
+CURRENT_INTERLUDE_PERSPECTIVE = None
+START_LINK = None
 if len(sys.argv)<2:
     START_LINK = "https://palewebserial.wordpress.com/2020/05/05/blood-run-cold-0-0/"
 else:
     START_LINK = sys.argv[1]
+    if len(sys.argv) > 2:
+        # If this is an interlude, the perspective will have (hopefully)
+        # been passed in as an argument to the script. 
+        CURRENT_INTERLUDE_PERSPECTIVE = sys.argv[2]
 
-###############################################################################
-########## Add Interlude Perspectives Here ###################################
-INTERLUDE_PERSPECTIVES = {
-    'Lost For Words 1.z'     : 'Gabe',
-    'Stolen Away 2.z'        : 'Nicolette',
-    'Out on a Limb 3.z'      : 'Zed',
-    'Leaving a Mark 4.x'     : 'Snowdrop',
-    'Back Away 5.a'          : 'Clementine',
-    'Back Away 5.b'          : 'Daniel',
-    'Back Away 5.c'          : 'Clementine',
-    'Back Away 5.d'          : 'Pecker-Matthew-Tashlit-Miss',
-    'Cutting Class 6.z'      : 'Fernanda',
-    'Gone Ahead 7.a'         : 'Kevin',
-    'Gone Ahead 7.x'         : 'Alexander',
-    'Vanishing Points 8.a'   : 'Liberty',
-    'Shaking Hands 9.z'      : 'Tashlit',
-    'One After Another 10.a' : 'John',
-    'One After Another 10.b' : 'Cig',
-    'One After Another 10.c' : 'Chloe',
-    'One After Another 10.d' : 'Alpeana',
-    'One After Another 10.e' : 'Toadswallow',
-    'One After Another 10.z' : 'Edith',
-    'Dash to Pieces 11.z'    : 'Maricica',
-    # 12a (Cherrypop) handled separately
-    'False Moves 12.a'       : 'Witch Hunters',
-    'False Moves 12.z'       : 'Reid',
-    'B1'                     : 'Ray',
-    'B2'                     : 'John',
-    'B3'                     : 'Alabaster',
-    'B4'                     : 'Cagerattler-Frances-Plath',
-    'B5'                     : 'John',
-    'Fall Out 14.z'          : 'Basil Winters',
-    'Playing a Part 15.z'    : 'Gilkey',
-    'Left in the Dust 16.y'  : 'Milly',
-    'Left in the Dust 16.z'  : 'Queen-Cassandra-Kitty-Bridge',
-    "Gone and Done It 17.a"  : 'Elizabeth Driscoll',
-    "Gone and Done It 17.b"  : 'Eloise',
-    "Gone and Done It 17.x"  : 'Easton Songetay',
-    "Gone and Done It 17.y"  : 'Wye Belanger',
-    "Gone and Done It 17.z"  : 'Musser',
-    "Wild Abandon 18.a"      : 'Luna Hare-BSW-Dom',
-    "Wild Abandon 18.b"      : 'Biscuit',
-    "Wild Abandon 18.c"      : 'Anthem Tedd',
-    'Wild Abandon 18.y'      : 'Lis',
-    "Wild Abandon 18.z"      : 'Brie-Ann-Seth',
-    "Crossed with Silver 19.z"      : 'The Aurum Coil',
-    "Let Slip 20.a"          : 'Nomi',
-    "Let Slip 20.b"          : 'Freeman'
+#-----------------------------------------------------------------------------#
 
-}
-###############################################################################
-###############################################################################
+# Load mapping of interludes to perspectives ##################################
+
+with open("interlude_perspectives.pickle", "rb") as file:
+    INTERLUDE_PERSPECTIVES = pickle.load(file)
+
+#-----------------------------------------------------------------------------#
+
+# Definitions ##############################################################
 
 class Chapter():
   def __init__(self, url):
     self.url = url
+
+#-----------------------------------------------------------------------------#
 
 def get_next_link(entry_contents):
     """Returns the link to the next chapter, or None if there is no next
@@ -96,6 +66,27 @@ def get_next_link(entry_contents):
                 if child.get_text().strip() in {"Next Chapter", "ex Chapr"}:
                     return child.get("href"), entry_contents[i+1:]
     return None, entry_contents
+
+def handle_interlude_perspective(chap_title, perspective):
+    """Returns 'Interlude - [perspective of this chapter]'. 
+    This function should only be called on interlude chapters."""
+    if perspective == "Interude":
+        # Fix Cherry's spelling.
+        perspective = "Interlude - Cherrypop"
+    else:
+        if chap_title in INTERLUDE_PERSPECTIVES:
+            perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
+        else:
+            # We do not already know the perspective of this interlude and must either request it from the user, or store the perspective provided by the user.
+            if CURRENT_INTERLUDE_PERSPECTIVE is not None:
+                perspective = "Interlude - " + CURRENT_INTERLUDE_PERSPECTIVE
+                INTERLUDE_PERSPECTIVES[chap_title] = CURRENT_INTERLUDE_PERSPECTIVE
+                with open('interlude_perspectives.pickle', 'wb') as file:
+                    pickle.dump(INTERLUDE_PERSPECTIVES, file)
+            else:
+                perspective = "Interlude - ??"
+                print("*************** WARNING ******************\n\nThere is no interlude perspective specified yet for "+chap_title+". Please pass in the interlude perspective of this chapter as the second argument to the script, after the chapter link, and the perspective will be saved for future use.\n\n******************************************")
+    return perspective
 
 def get_header(entry_contents, chap_title):
     """Returns the perspective of this chapter (e.g. 'Lucy').
@@ -120,27 +111,15 @@ def get_header(entry_contents, chap_title):
         elif item.name == "p":
             if item.get_text().strip().lower() == "nora":
                 return "Avery-Nora",remainder
+            if item.get_text().strip().lower() in {"interlude", "interludes", "interude"}:
+                # This is an interlude
+                perspective = handle_interlude_perspective(chap_title, perspective)
+                remainder = entry_contents[i+1:]
+                return perspective, remainder
             if item.get_text().strip().lower() in {"avery", "verona", "lucy", 
-                "interlude", "interludes", "interude", "prologue", "avery (again)", 
-                "verona (again)", "lucy (again)"}:
+                "avery (again)", "verona (again)", "lucy (again)", "prologue"}:
                 if perspective is None:
                     perspective = item.get_text().strip()
-                    # If perspective is an interlude, more work is needed to
-                    # add the true chapter perspective.
-                    if perspective == "Interude":
-                        # Fix Cherry's spelling.
-                        perspective = "Interlude - Cherrypop"
-                    elif perspective == "Interlude" or perspective == "Interludes":
-                        if chap_title in INTERLUDE_PERSPECTIVES:
-                            perspective = "Interlude - " + INTERLUDE_PERSPECTIVES[chap_title]
-                        else:
-                            raise Exception(" ***********\n" + \
-                                "There is no interlude perspective " + \
-                                "specified yet for " + chap_title + \
-                                ". Please open get_text.py and map this " + \
-                                "chapter to a perspective in the map " + \
-                                "INTERLUDE_PERSPECTIVES, near the top of " + \
-                                "the file.")
                     remainder = entry_contents[i+1:]
                 else:
                     # Multiple perspectives found.
@@ -205,17 +184,7 @@ def download_this_chapter(chapter, page_text):
     # 'Break' chapters get a special perspective rule.
     if "13.B" in chapter.title:
         break_chap_name = re.findall("B[0-9]+", chapter.title)[0]
-        if break_chap_name in INTERLUDE_PERSPECTIVES:
-            chapter.perspective = ("Interlude - " + 
-                            INTERLUDE_PERSPECTIVES[break_chap_name])
-        else:
-            raise Exception(" ***********\n" + \
-                "There is no perspective " + \
-                "specified yet for " + break_chap_name + \
-                ". Please open get_text.py and map this " + \
-                "chapter to a perspective in the map " + \
-                "INTERLUDE_PERSPECTIVES, near the top of " + \
-                "the file.")
+        chapter.perspective = handle_interlude_perspective(break_chap_name, "")
     elif "SB" in chapter.title:
         chapter.perspective = "All-Jas"
     else:
