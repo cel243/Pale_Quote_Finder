@@ -15,6 +15,14 @@ import sys
 CHAP_NAME = None
 PERSPECTIVE = None
 if len(sys.argv)<3:
+    with open('interlude_perspectives.pickle', 'rb') as file:
+        INTERLUDE_PERSPECTIVES = pickle.load(file)
+
+    print("{")
+    for chap, perspec in INTERLUDE_PERSPECTIVES.items():
+        print("    " + chap + "  :  " + perspec)
+    print("}")
+
     raise("Error. Invalid number of arguments. Please read instructions in overwrite_interlude_perspective.py")
 else:
     CHAP_NAME = sys.argv[1]
